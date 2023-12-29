@@ -58,7 +58,11 @@ public function home()
 {
     $jogosCollection = Salsa::where('is_enabled', true)->get();
     $jogos = $jogosCollection->toArray();
-    return view('pages.home', compact('jogos'));
+    if($jogos == null){
+      $jogos = array();
+    }
+    
+    return view('pages.home', compact('jogos')); 
 }
     
 

@@ -320,18 +320,12 @@
                     $chunkedJogos = array_chunk($jogos, 1);
                 @endphp
 
-                @foreach($chunkedJogos as $chunk)
+                @ ($chunkedJogos as $chunk)
                     <div class="swiper-slide">
                         @foreach($chunk as $game)
                             <div class="game-slide">
-                                @if(isset($game['local_image']) && is_string($game['local_image']))
-                                <div class="img-game-slide" style="background-image: url('{{ $game['local_image'] }}'); background-position: center; background-size: cover;">
-                                    </div>
-                                @else
                                 <div class="img-game-slide" style="background-image: url('');">
-                                    </div>
-                                @endif
-
+                                </div>
                                 <div class="hover-game-slide">
                                 <form action="{{ secure_url('playGame', ['game_id' => $game['id'] ?? null]) }}" method="post">
                                         @csrf
@@ -345,7 +339,7 @@
 
                                     <div class="provider-game-slide">
                                         <a href="#">
-                                            @if(isset($game['name']) && is_string($game['name']))
+                                            @if(is_string($game['name']) && isset($game['name']))
                                                 {{ $game['name'] }}
                                             @else
                                                 Nome do Jogo Não Disponível
