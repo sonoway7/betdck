@@ -320,7 +320,7 @@
                     $chunkedJogos = array_chunk($jogos, 1);
                 @endphp
 
-                @ ($chunkedJogos as $chunk)
+                @foreach($chunkedJogos as $chunk)
                     <div class="swiper-slide">
                         @foreach($chunk as $game)
                             <div class="game-slide">
