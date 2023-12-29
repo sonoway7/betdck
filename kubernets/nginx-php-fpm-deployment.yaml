@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-php-fpm-deployment
+  labels:
+    app: nginx-php-fpm
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: nginx-php-fpm
+  template:
+    metadata:
+      labels:
+        app: nginx-php-fpm
+    spec:
+      containers:
+      - name: nginx
+        image: softwaresolutionit/nginx:latest
+        ports:
+        - containerPort: 80
+
+      - name: php-fpm
+        image: softwaresolutionit/php-betx:latest
+        ports:
+        - containerPort: 9000
