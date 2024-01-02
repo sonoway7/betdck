@@ -54,16 +54,41 @@ class PagesController extends Controller
         return view('pages.deposito');
     }
 
-public function home()
-{
-    $jogosCollection = Salsa::where('is_enabled', true)->get();
-    $jogos = $jogosCollection->toArray();
-    if($jogos == null){
-      $jogos = array();
+    public function home()
+    {
+        $jogosCollection = Salsa::where('is_enabled', true)->get();
+        $jogos = $jogosCollection->toArray();
+    
+        if ($jogos == null) {
+            $jogos = array();
+        } else {
+            foreach ($jogos as &$jogo) {
+                $idJogo = $jogo['id'];
+                $caminhoImagem = $this->encontrarImagemJogos($idJogo);
+    
+                if ($caminhoImagem !== "") {
+                    $jogo['image_path'] = $caminhoImagem;
+                }
+            }
+        }
+    
+        return view('pages.home', compact('jogos'));
     }
     
-    return view('pages.home', compact('jogos')); 
-}
+    private function encontrarImagemJogos($idJogo)
+    {
+        $arquivos = scandir('images/games');
+    
+        foreach ($arquivos as $arquivo) {
+            $arquivoSemEspacos = trim($arquivo);
+            
+            if (strpos($arquivoSemEspacos, $idJogo . '_') === 0) {
+                return "images/games/" . $arquivoSemEspacos;
+            }
+        }
+    
+        return "";
+    }
     
 
     public function depositPaggue($transaction)
