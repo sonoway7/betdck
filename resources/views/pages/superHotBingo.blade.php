@@ -9,7 +9,7 @@
             position: relative;
             width: 54vw; 
             height: 40vw;
-            margin: 5vh auto; 
+            margin: 0vh auto; 
             overflow: hidden;
         }
 
