@@ -324,8 +324,14 @@
                     <div class="swiper-slide">
                         @foreach($chunk as $game)
                             <div class="game-slide">
+                                @if(isset($game['image_path']) && is_string($game['image_path']))
+                                <div class="img-game-slide" style="background-image: url('{{ $game['image_path'] }}'); background-position: center; background-size: cover;">
+                                    </div>
+                                @else
                                 <div class="img-game-slide" style="background-image: url('');">
-                                </div>
+                                    </div>
+                                @endif
+
                                 <div class="hover-game-slide">
                                 <form action="{{ secure_url('playGame', ['game_id' => $game['id'] ?? null]) }}" method="post">
                                         @csrf
@@ -339,7 +345,7 @@
 
                                     <div class="provider-game-slide">
                                         <a href="#">
-                                            @if(is_string($game['name']) && isset($game['name']))
+                                            @if(isset($game['name']) && is_string($game['name']))
                                                 {{ $game['name'] }}
                                             @else
                                                 Nome do Jogo Não Disponível
@@ -420,7 +426,7 @@
         if (window.innerWidth < 768) {
             return 2;
         } else {
-            return 6;
+            return 5;
         }
     }
 
