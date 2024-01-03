@@ -398,37 +398,45 @@
 @endif
 
 <script>
-    var swiper1 = new Swiper('.game-swiper1', {
-        slidesPerView: getSlidesPerView(),
-        slidesPerColumn: 3,
-        spaceBetween: 10,
-        slidesPerGroup: 5,
-        navigation: {
-            nextEl: '.swiper-button-next',
-            prevEl: '.swiper-button-prev',
-        },
-    });
-
-    var swiper2 = new Swiper('.game-swiper2', {
-        slidesPerView: getSlidesPerView(),
-        slidesPerColumn: 3,
-        spaceBetween: 10,
-        navigation: {
-            nextEl: '.swiper-button-next',
-            prevEl: '.swiper-button-prev',
-        },
-        controller: {
-            control: swiper1,
-        },
-    });
-
-    function getSlidesPerView() {
-        if (window.innerWidth < 768) {
-            return 2;
-        } else {
-            return 5;
-        }
+function getSliderSettings() {
+    if (window.innerWidth < 768) {
+        return {
+            slidesPerView: 2,
+            slidesPerGroup: 2
+        };
+    } else {
+        return {
+            slidesPerView: 5,
+            slidesPerGroup: 5
+        };
     }
+}
+
+var swiperSettings1 = getSliderSettings();
+var swiper1 = new Swiper('.game-swiper1', {
+    slidesPerView: swiperSettings1.slidesPerView,
+    slidesPerColumn: 3,
+    spaceBetween: 10,
+    slidesPerGroup: swiperSettings1.slidesPerGroup,
+    navigation: {
+        nextEl: '.swiper-button-next',
+        prevEl: '.swiper-button-prev',
+    },
+});
+
+var swiperSettings2 = getSliderSettings();
+var swiper2 = new Swiper('.game-swiper2', {
+    slidesPerView: swiperSettings2.slidesPerView,
+    slidesPerColumn: 3,
+    spaceBetween: 10,
+    navigation: {
+        nextEl: '.swiper-button-next',
+        prevEl: '.swiper-button-prev',
+    },
+    controller: {
+        control: swiper1,
+    },
+});
 
     window.addEventListener('resize', function () {
         swiper1.params.slidesPerView = getSlidesPerView();
