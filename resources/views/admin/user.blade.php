@@ -51,119 +51,17 @@
                                                     </div>
                                                     <div class="kt-widget12__content">
                                                         <h6 class="block capitalize-font text-center">
-                                                            Apostas em Jackpot
-                                                        </h6>
-                                                        <div class="kt-widget12__item">
-                                                            <div class="kt-widget12__info text-center">
-                                                                <span class="kt-widget12__desc">Lucrou</span>
-                                                                <span
-                                                                    class="kt-widget12__value">R$ {{$jackpotWin}}</span>
-                                                            </div>
-
-                                                            <div class="kt-widget12__info text-center">
-                                                                <span class="kt-widget12__desc">Perdas</span>
-                                                                <span
-                                                                    class="kt-widget12__value">R$ {{$jackpotLose}}</span>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="kt-widget12__content">
-                                                        <h6 class="block capitalize-font text-center">
-                                                            Apostas em Wheel
-                                                        </h6>
-                                                        <div class="kt-widget12__item">
-                                                            <div class="kt-widget12__info text-center">
-                                                                <span class="kt-widget12__desc">Lucrou</span>
-                                                                <span class="kt-widget12__value">R$ {{$wheelWin}}</span>
-                                                            </div>
-
-                                                            <div class="kt-widget12__info text-center">
-                                                                <span class="kt-widget12__desc">Perdas</span>
-                                                                <span
-                                                                    class="kt-widget12__value">R$ {{$wheelLose}}</span>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="kt-widget12__content">
-                                                        <h6 class="block capitalize-font text-center">
-                                                            Apostas em Crash
-                                                        </h6>
-                                                        <div class="kt-widget12__item">
-                                                            <div class="kt-widget12__info text-center">
-                                                                <span class="kt-widget12__desc">Lucrou</span>
-                                                                <span class="kt-widget12__value">R$ {{$crashWin}}</span>
-                                                            </div>
-
-                                                            <div class="kt-widget12__info text-center">
-                                                                <span class="kt-widget12__desc">Perdas</span>
-                                                                <span
-                                                                    class="kt-widget12__value">R$ {{$crashLose}}</span>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="kt-widget12__content">
-                                                        <h6 class="block capitalize-font text-center">
-                                                            Apostas em PvP
-                                                        </h6>
-                                                        <div class="kt-widget12__item">
-                                                            <div class="kt-widget12__info text-center">
-                                                                <span class="kt-widget12__desc">Lucrou</span>
-                                                                <span class="kt-widget12__value">R$ {{$coinWin}}</span>
-                                                            </div>
-
-                                                            <div class="kt-widget12__info text-center">
-                                                                <span class="kt-widget12__desc">Perdas</span>
-                                                                <span class="kt-widget12__value">R$ {{$coinLose}}</span>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="kt-widget12__content">
-                                                        <h6 class="block capitalize-font text-center">
-                                                            Apostas em Battle
-                                                        </h6>
-                                                        <div class="kt-widget12__item">
-                                                            <div class="kt-widget12__info text-center">
-                                                                <span class="kt-widget12__desc">Lucrou</span>
-                                                                <span
-                                                                    class="kt-widget12__value">R$ {{$battleWin}}</span>
-                                                            </div>
-
-                                                            <div class="kt-widget12__info text-center">
-                                                                <span class="kt-widget12__desc">Perdas</span>
-                                                                <span
-                                                                    class="kt-widget12__value">R$ {{$battleLose}}</span>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="kt-widget12__content">
-                                                        <h6 class="block capitalize-font text-center">
-                                                            Apostas em Dice
-                                                        </h6>
-                                                        <div class="kt-widget12__item">
-                                                            <div class="kt-widget12__info text-center">
-                                                                <span class="kt-widget12__desc">Lucrou</span>
-                                                                <span class="kt-widget12__value">R$ {{$diceWin}}</span>
-                                                            </div>
-
-                                                            <div class="kt-widget12__info text-center">
-                                                                <span class="kt-widget12__desc">Perdas</span>
-                                                                <span class="kt-widget12__value">R$ {{$diceLose}}</span>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="kt-widget12__content">
-                                                        <h6 class="block capitalize-font text-center">
                                                             Resultado Completo
                                                         </h6>
                                                         <div class="kt-widget12__item">
                                                             <div class="kt-widget12__info text-center">
                                                                 <span class="kt-widget12__desc">Lucros em Tudo</span>
-                                                                <span class="kt-widget12__value">R$ {{$betWin}}</span>
+                                                                <span class="kt-widget12__value">R$ 0</span>
                                                             </div>
 
                                                             <div class="kt-widget12__info text-center">
                                                                 <span class="kt-widget12__desc">Perdas em Tudo</span>
-                                                                <span class="kt-widget12__value">R$ {{$betLose}}</span>
+                                                                <span class="kt-widget12__value">R$ 0</span>
                                                             </div>
                                                         </div>
                                                     </div>

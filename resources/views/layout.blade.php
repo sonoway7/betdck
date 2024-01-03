@@ -218,89 +218,40 @@ crossorigin="anonymous">
                             <div class="listmenu"></div>
 
                             <div class="one-menu">
-                                <a>
-                                    <div class="img-one-menu">
-                                        <svg width="24" height="24" focusable="false" aria-hidden="true" class="">
-                                            <use xlink:href="/img/symbols.svg#icon-crash" class="svg-use"></use>
-                                        </svg>
-                                    </div>
-                                    Crash</a>
+                                <a href="/playGame/21">
+                                    Fortune Tiger</a>
                             </div>
 
                             
                             <div class="one-menu">
-                                <a>
-                                    <div class="img-one-menu">
-                                        <i class="fa fa-circle-dot" style="color: #55657e; font-size: 24px"></i>
-                                    </div>
-                                    Double</a>
+                                <a href="/playGame/20">
+                                    Baccarat</a>
                             </div>
 
 
                             <div class="one-menu">
-                                <a>
-                                    <div class="img-one-menu">
-                                        <svg width="24" height="24" focusable="false" aria-hidden="true" class="">
-                                            <use xlink:href="/img/symbols.svg#icon-roulette" class="svg-use"></use>
-                                        </svg>
-                                    </div>
-                                    Roleta</a>
+                                <a href="/playGame/18">
+                                    Spaceman</a>
                             </div> 
 
 
                             <div class="one-menu">
-                                <a>
-                                    <div class="img-one-menu">
-                                        <svg width="24" height="24" focusable="false" aria-hidden="true" class="">
-                                            <use xlink:href="/img/symbols.svg#icon-dice" class="svg-use"></use>
-                                        </svg>
-                                    </div>
-                                    Dice</a>
+                                <a href="/playGame/23">
+                                    Candy Burst</a>
                             </div>
 
 
                             <div class="one-menu">
-                                <a>
-                                    <div class="img-one-menu">
-                                        <svg width="24" height="24" focusable="false" aria-hidden="true" class="">
-                                            <use xlink:href="/img/symbols.svg#icon-mines" class="svg-use"></use>
-                                        </svg>
-                                    </div>
-                                    Mines</a>
-                            </div>
-                            <!--
-                            <div class="one-menu">
-                                <a href="/superHotBingo">
-                                    <div class="img-one-menu">
-                                        <svg width="24" height="24" focusable="false" aria-hidden="true" class="">
-                                            <use xlink:href="/img/symbols.svg#icon-mines" class="svg-use"></use>
-                                        </svg>
-                                    </div>
-                                    superHotBingo</a>
-                            </div>
-                            !-->
-
-
-                            <div class="one-menu">
-                                <a>
-                                    <div class="img-one-menu">
-                                        <svg width="24" height="24" focusable="false" aria-hidden="true" class="">
-                                            <use xlink:href="/img/symbols.svg#icon-flip" class="svg-use"></use>
-                                        </svg>
-                                    </div>
-                                    Batalha</a>
+                                <a href="/playGame/22">
+                                    Leprechaun</a>
                             </div>
 
 
                             <div class="one-menu">
-                                <a>
-                                    <div class="img-one-menu">
-                                        <svg width="24" height="24" focusable="false" aria-hidden="true" class="">
-                                            <use xlink:href="/img/symbols.svg#icon-tower" class="svg-use"></use>
-                                        </svg>
-                                    </div>
-                                    Tower</a>
+                                <a href="/playGame/19">
+                                    Fruit Party</a>
                             </div>
+
                             @auth
                                 <div class="listmenu">
                                 </div>

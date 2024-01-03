@@ -150,7 +150,7 @@ class AdminController extends Controller
             ];
         }
 
-        return view('admin.user', compact('user', 'pay', 'withdraw', 'exchanges', 'totalInviteProfit', 'doubleWin', 'doubleLose', 'jackpotWin', 'jackpotLose', 'sends', 'sends_from', 'wheelWin', 'wheelLose', 'crashWin', 'crashLose', 'coinWin', 'coinLose', 'battleWin', 'battleLose', 'diceWin', 'diceLose', 'betWin', 'betLose'));
+        return view('admin.user', compact('user', 'pay', 'withdraw', 'exchanges', 'totalInviteProfit', 'sends', 'sends_from'));
     }
 
     public function userSave(Request $r)
