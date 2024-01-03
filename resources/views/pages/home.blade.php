@@ -49,22 +49,55 @@
 <div class="tamanho mobile-hide">
     <div class="owl-carousel testimonial-carousel" style="max-width:97%; padding-top:20px;">
         <div class="text-center">
-            <a href="#"><img class="img-fluid mx-auto mb-3" src="img/slider/d1.jpg" alt=""></a>
+            <a href="/playGame/21"><img class="img-fluid mx-auto mb-3" src="img/slider/d1.jpg" alt=""></a>
         </div>
         <div class="text-center">
-            <a href="#"><img class="img-fluid mx-auto mb-3" src="img/slider/d2.jpg" alt=""></a>
+            <a data-toggle="modal" data-target="#promoModal"><img class="img-fluid mx-auto mb-3" src="img/slider/d4.jpg" alt=""></a>
         </div>
         <div class="text-center">
-            <a href="#"><img class="img-fluid mx-auto mb-3" src="img/slider/d3.jpg" alt=""></a>
-        </div>
-        <div class="text-center">
-            <a href="#"><img class="img-fluid mx-auto mb-3" src="img/slider/d4.jpg" alt=""></a>
-        </div>
-        <div class="text-center">
-            <a href="#"><img class="img-fluid mx-auto mb-3" src="img/slider/d5.jpg" alt=""></a>
+            <a href="/affiliate"><img class="img-fluid mx-auto mb-3" src="img/slider/d5.jpg" alt=""></a>
         </div>
     </div>
 </div>
+
+
+                    <div class="modal fade" id="promoModal" tabindex="-1" role="dialog"
+                     aria-labelledby="promoModalLabel"
+                     aria-hidden="true">
+                    <div class="modal-dialog faucet-demo-modal modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                            <button class="modal-close" data-dismiss="modal" aria-label="Close">
+                                <svg class="icon icon-close">
+                                    <use xlink:href="/img/symbols.svg#icon-close"></use>
+                                </svg>
+                            </button>
+                            <div class="faucet-container">
+                                <h3 class="faucet-caption"><span>Código Promocional</span></h3>
+                                <div class="caption-line"><span class="span"><img src="/img/MOEDA_01.png" height="30px"/></span></div>
+                                <div class="form-row">
+                                    <label>
+                                        <div class="form-field">
+                                            <div class="input-valid">
+                                                <input class="input-field input-with-icon" name="promo"
+                                                       placeholder="Digite um código" id="promoInput">
+                                                <div class="input-icon">
+                                                    <svg class="icon icon-promo">
+                                                        <use xlink:href="/img/symbols.svg#icon-promo"></use>
+                                                    </svg>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </label>
+                                </div>
+                                <div class="faucet-modal-form">
+                                    <button type="button" class="btn btn-green activatePromo">
+                                        <span>RECEBER BÔNUS</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
 <style>
 
@@ -398,45 +431,37 @@
 @endif
 
 <script>
-function getSliderSettings() {
-    if (window.innerWidth < 768) {
-        return {
-            slidesPerView: 2,
-            slidesPerGroup: 2
-        };
-    } else {
-        return {
-            slidesPerView: 5,
-            slidesPerGroup: 5
-        };
+    var swiper1 = new Swiper('.game-swiper1', {
+        slidesPerView: getSlidesPerView(),
+        slidesPerColumn: 3,
+        spaceBetween: 10,
+        slidesPerGroup: 5,
+        navigation: {
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev',
+        },
+    });
+
+    var swiper2 = new Swiper('.game-swiper2', {
+        slidesPerView: getSlidesPerView(),
+        slidesPerColumn: 3,
+        spaceBetween: 10,
+        navigation: {
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev',
+        },
+        controller: {
+            control: swiper1,
+        },
+    });
+
+    function getSlidesPerView() {
+        if (window.innerWidth < 768) {
+            return 2;
+        } else {
+            return 5;
+        }
     }
-}
-
-var swiperSettings1 = getSliderSettings();
-var swiper1 = new Swiper('.game-swiper1', {
-    slidesPerView: swiperSettings1.slidesPerView,
-    slidesPerColumn: 3,
-    spaceBetween: 10,
-    slidesPerGroup: swiperSettings1.slidesPerGroup,
-    navigation: {
-        nextEl: '.swiper-button-next',
-        prevEl: '.swiper-button-prev',
-    },
-});
-
-var swiperSettings2 = getSliderSettings();
-var swiper2 = new Swiper('.game-swiper2', {
-    slidesPerView: swiperSettings2.slidesPerView,
-    slidesPerColumn: 3,
-    spaceBetween: 10,
-    navigation: {
-        nextEl: '.swiper-button-next',
-        prevEl: '.swiper-button-prev',
-    },
-    controller: {
-        control: swiper1,
-    },
-});
 
     window.addEventListener('resize', function () {
         swiper1.params.slidesPerView = getSlidesPerView();
