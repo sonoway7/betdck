@@ -221,7 +221,7 @@
         // carousel
         $(".testimonial-carousel").owlCarousel({
             autoplay: true,
-            smartSpeed: 500,
+            smartSpeed: 300,
             dots: false,
             loop: true,
             items: 1
