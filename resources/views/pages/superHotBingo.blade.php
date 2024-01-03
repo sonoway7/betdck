@@ -18,6 +18,14 @@
             height: 100%;
             border: 0; /* Remova a borda se desejar */
         }
+        @media (max-width: 767px) {
+        .tower_tower__1ms3K {
+            position: relative;
+            height: 100vw;
+            margin: 0vh auto;
+            overflow: hidden;
+        }
+    }
     </style>
 
     <div class="section game-section">
