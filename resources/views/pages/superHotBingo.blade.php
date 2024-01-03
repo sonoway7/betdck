@@ -21,7 +21,7 @@
         @media (max-width: 767px) {
         .tower_tower__1ms3K {
             position: relative;
-            height: 100vw;
+            height: calc(100vh - 190px);
             margin: 0vh auto;
             overflow: hidden;
         }
