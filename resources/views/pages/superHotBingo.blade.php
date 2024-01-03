@@ -23,6 +23,7 @@
             position: relative;
             height: calc(100vh - 190px);
             margin: 0vh auto;
+            width: 100%;
             overflow: hidden;
         }
     }
