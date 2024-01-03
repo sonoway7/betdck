@@ -20,7 +20,7 @@
                     <div class="kt-portlet__body">
                         <div class="kt-widget28">
                             <div class="kt-widget28__visual"
-                                 style="background: url({{$user->avatar}}) bottom center no-repeat">
+                            style="background: url({{$user->avatar}}) center center no-repeat; background-size: 150px; background-repeat: no-repeat; background-position: center;">
                             </div>
                             <div class="kt-widget28__wrapper kt-portlet__space-x">
                                 <div class="tab-content">
