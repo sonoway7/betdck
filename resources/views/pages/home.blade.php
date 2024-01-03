@@ -55,7 +55,7 @@
             <a data-toggle="modal" data-target="#promoModal"><img class="img-fluid mx-auto mb-3" src="img/slider/d4.jpg" alt=""></a>
         </div>
         <div class="text-center">
-            <a href="/affiliate"><img class="img-fluid mx-auto mb-3" src="img/slider/d5.jpg" alt=""></a>
+            <a href="#"><img class="img-fluid mx-auto mb-3" src="img/slider/d5.jpg" alt=""></a>
         </div>
     </div>
 </div>
