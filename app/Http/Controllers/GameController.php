@@ -423,6 +423,7 @@ class GameController extends Controller
                 $user->update(['bet_reference_num' =>$params['BetReferenceNum']['@attributes']['Value']]);
   
                 $user->update(['balance' => $resultValue / 100]);
+                event(new BalanceUpdated($user, $user->balance));
 
                 $response = "<PKT>
                     <Result Name='PlaceBet' Success='1'>
@@ -475,6 +476,7 @@ class GameController extends Controller
                 $user->update(['win_reference_num' =>$params['WinReferenceNum']['@attributes']['Value']]);
 
                 $user->update(['balance' => $resultValue / 100]);
+                event(new BalanceUpdated($user, $user->balance));
 
                 $response = "<PKT>
                     <Result Name='AwardWinnings' Success='1'>
@@ -523,6 +525,7 @@ class GameController extends Controller
         $user->update(['transaction' =>$params['TransactionID']['@attributes']['Value']]);
 
         $user->update(['balance' => $resultValue / 100]);
+        event(new BalanceUpdated($user, $user->balance));
 
         if ($this->token) {
             if ($this->compareHash($params, $this->token, $method)) {

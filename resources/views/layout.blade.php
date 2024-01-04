@@ -5,6 +5,8 @@ crossorigin="anonymous">
 </script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.1.1/socket.io.js"></script>
 @if(!Auth::check() && $settings->site_disable || $settings->site_disable && Auth::check() && !$u->is_admin)
+<script src="https://js.pusher.com/7.0/pusher.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/laravel-echo/dist/echo.iife.min.js"></script>
 
     <!DOCTYPE html>
 <html>
@@ -1852,6 +1854,14 @@ crossorigin="anonymous">
   setInterval(updatePlayersCount, 30000);
 </script>
 
+<script>
+const USER_ID = "{{ $u->id }}";
+Echo.channel('user.' + USER_ID)
+    .listen('balance.updated', (e) => {
+        console.log('Saldo atualizado:', e.balance);
+        $('#balance_bal').html('<strong>' + e.balance + '</strong>');
+    });
+</script>
 
             </body>
             </html>
