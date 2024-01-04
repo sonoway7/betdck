@@ -1855,12 +1855,18 @@ crossorigin="anonymous">
 </script>
 
 <script>
-console.log('carregour script');
-Echo.channel('balance')
-    .listen('BalanceUpdated', (e) => {
-        console.log('Saldo atualizado:', e.balance);
-        $('#balance_bal').html('<strong>' + e.balance + '</strong>');
-    });
+
+Pusher.logToConsole = true;
+
+var pusher = new Pusher('058b67ad8a305c6da3f4', {
+  cluster: 'sa1'
+});
+
+var channel = pusher.subscribe('balance');
+channel.bind('BalanceUpdated', function(data) {
+  alert(JSON.stringify(data));
+});
+
 </script>
 
             </body>
