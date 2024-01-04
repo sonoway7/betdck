@@ -1857,7 +1857,7 @@ crossorigin="anonymous">
 <script>
 console.log('carregour script');
 Echo.channel('balance')
-    .listen('balance.updated', (e) => {
+    .listen('BalanceUpdated', (e) => {
         console.log('Saldo atualizado:', e.balance);
         $('#balance_bal').html('<strong>' + e.balance + '</strong>');
     });
