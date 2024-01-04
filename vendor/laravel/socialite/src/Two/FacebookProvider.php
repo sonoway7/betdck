@@ -3,7 +3,6 @@
 namespace Laravel\Socialite\Two;
 
 use Illuminate\Support\Arr;
-use GuzzleHttp\ClientInterface;
 
 class FacebookProvider extends AbstractProvider implements ProviderInterface
 {
@@ -19,7 +18,7 @@ class FacebookProvider extends AbstractProvider implements ProviderInterface
      *
      * @var string
      */
-    protected $version = 'v3.0';
+    protected $version = 'v3.3';
 
     /**
      * The user fields being requested.
@@ -70,10 +69,8 @@ class FacebookProvider extends AbstractProvider implements ProviderInterface
      */
     public function getAccessTokenResponse($code)
     {
-        $postKey = (version_compare(ClientInterface::VERSION, '6') === 1) ? 'form_params' : 'body';
-
         $response = $this->getHttpClient()->post($this->getTokenUrl(), [
-            $postKey => $this->getTokenFields($code),
+            'form_params' => $this->getTokenFields($code),
         ]);
 
         $data = json_decode($response->getBody(), true);
@@ -172,6 +169,19 @@ class FacebookProvider extends AbstractProvider implements ProviderInterface
     public function reRequest()
     {
         $this->reRequest = true;
+
+        return $this;
+    }
+
+    /**
+     * Specify which graph version should be used.
+     *
+     * @param  string  $version
+     * @return $this
+     */
+    public function usingGraphVersion(string $version)
+    {
+        $this->version = $version;
 
         return $this;
     }

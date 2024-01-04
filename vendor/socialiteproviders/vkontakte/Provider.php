@@ -3,18 +3,23 @@
 namespace SocialiteProviders\VKontakte;
 
 use Illuminate\Support\Arr;
-use Laravel\Socialite\Two\ProviderInterface;
+use Laravel\Socialite\Two\InvalidStateException;
 use SocialiteProviders\Manager\OAuth2\AbstractProvider;
 use SocialiteProviders\Manager\OAuth2\User;
 
-class Provider extends AbstractProvider implements ProviderInterface
+class Provider extends AbstractProvider
 {
-    protected $fields = ['id', 'email', 'first_name', 'last_name', 'screen_name', 'photo_max'];
+    protected $fields = ['id', 'email', 'first_name', 'last_name', 'screen_name', 'photo_200'];
 
     /**
      * Unique Provider Identifier.
      */
     const IDENTIFIER = 'VKONTAKTE';
+
+     /**
+     * {@inheritdoc}
+     */
+    protected $stateless = true;
 
     /**
      * {@inheritdoc}
@@ -24,7 +29,7 @@ class Provider extends AbstractProvider implements ProviderInterface
     /**
      * Last API version.
      */
-    const VERSION = '5.91';
+    const VERSION = '5.92';
 
     /**
      * {@inheritdoc}
@@ -49,14 +54,21 @@ class Provider extends AbstractProvider implements ProviderInterface
      */
     protected function getUserByToken($token)
     {
+        $from_token = [];
+        if (is_array($token)) {
+            $from_token["email"] = isset($token["email"]) ? $token["email"] : null;
+            
+            $token = $token["access_token"];
+        }
+
         $params = http_build_query([
             'access_token' => $token,
             'fields'       => implode(',', $this->fields),
-            'language'     => $this->getConfig('lang', 'en'),
+            'lang'     => $this->getConfig('lang', 'en'),
             'v'            => self::VERSION,
         ]);
 
-        $response = $this->getHttpClient()->get('https://api.vk.com/method/users.get?'.$params);
+        $response = $this->getHttpClient()->get('https://api.vk.com/method/users.get?' . $params);
 
         $contents = $response->getBody()->getContents();
 
@@ -69,7 +81,29 @@ class Provider extends AbstractProvider implements ProviderInterface
             ));
         }
 
-        return $response['response'][0];
+        return array_merge($from_token, $response['response'][0]);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function user() {
+        if ($this->hasInvalidState()) {
+            throw new InvalidStateException;
+        }
+
+        $response = $this->getAccessTokenResponse($this->getCode());
+
+        $user = $this->mapUserToObject($this->getUserByToken($response));
+
+        $this->credentialsResponseBody = $response;
+
+        if ($user instanceof User) {
+            $user->setAccessTokenResponseBody($this->credentialsResponseBody);
+        }
+
+        return $user->setToken($this->parseAccessToken($response))
+            ->setExpiresIn($this->parseExpiresIn($response));
     }
 
     /**
@@ -82,7 +116,7 @@ class Provider extends AbstractProvider implements ProviderInterface
             'nickname' => Arr::get($user, 'screen_name'),
             'name'     => trim(Arr::get($user, 'first_name').' '.Arr::get($user, 'last_name')),
             'email'    => Arr::get($user, 'email'),
-            'avatar'   => Arr::get($user, 'photo_max'),
+            'avatar'   => Arr::get($user, 'photo_200'),
         ]);
     }
 

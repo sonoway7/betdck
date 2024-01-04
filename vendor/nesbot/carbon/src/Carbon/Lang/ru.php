@@ -8,12 +8,6 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-$transformDiff = function ($input) {
-    return strtr($input, [
-        'неделя' => 'неделю',
-        'секунда' => 'секунду',
-    ]);
-};
 
 /*
  * Authors:
@@ -38,26 +32,39 @@ $transformDiff = function ($input) {
  * - andrey-helldar
  * - Pavel Skripkin (psxx)
  * - AlexWalkerson
+ * - Vladislav UnsealedOne
+ * - dima-bzz
  */
+
+use Carbon\CarbonInterface;
+
+$transformDiff = function ($input) {
+    return strtr($input, [
+        'неделя' => 'неделю',
+        'секунда' => 'секунду',
+        'минута' => 'минуту',
+    ]);
+};
+
 return [
     'year' => ':count год|:count года|:count лет',
-    'y' => ':count год|:count года|:count лет',
+    'y' => ':count г.|:count г.|:count л.',
     'a_year' => '{1}год|:count год|:count года|:count лет',
     'month' => ':count месяц|:count месяца|:count месяцев',
     'm' => ':count мес.',
     'a_month' => '{1}месяц|:count месяц|:count месяца|:count месяцев',
     'week' => ':count неделя|:count недели|:count недель',
-    'w' => ':count нед',
+    'w' => ':count нед.',
     'a_week' => '{1}неделя|:count неделю|:count недели|:count недель',
     'day' => ':count день|:count дня|:count дней',
-    'd' => ':count дня.',
+    'd' => ':count д.',
     'a_day' => '{1}день|:count день|:count дня|:count дней',
     'hour' => ':count час|:count часа|:count часов',
     'h' => ':count ч.',
     'a_hour' => '{1}час|:count час|:count часа|:count часов',
     'minute' => ':count минута|:count минуты|:count минут',
     'min' => ':count мин.',
-    'a_minute' => '{1}минута|:count минуту|:count минуты|:count минут',
+    'a_minute' => '{1}минута|:count минута|:count минуты|:count минут',
     'second' => ':count секунда|:count секунды|:count секунд',
     's' => ':count сек.',
     'a_second' => '{1}несколько секунд|:count секунду|:count секунды|:count секунд',
@@ -73,6 +80,15 @@ return [
     'before' => function ($time) use ($transformDiff) {
         return $transformDiff($time).' до';
     },
+    'diff_now' => 'только что',
+    'diff_today' => 'Сегодня,',
+    'diff_today_regexp' => 'Сегодня,?(?:\\s+в)?',
+    'diff_yesterday' => 'вчера',
+    'diff_yesterday_regexp' => 'Вчера,?(?:\\s+в)?',
+    'diff_tomorrow' => 'завтра',
+    'diff_tomorrow_regexp' => 'Завтра,?(?:\\s+в)?',
+    'diff_before_yesterday' => 'позавчера',
+    'diff_after_tomorrow' => 'послезавтра',
     'formats' => [
         'LT' => 'H:mm',
         'LTS' => 'H:mm:ss',
@@ -84,7 +100,7 @@ return [
     'calendar' => [
         'sameDay' => '[Сегодня, в] LT',
         'nextDay' => '[Завтра, в] LT',
-        'nextWeek' => function (\Carbon\CarbonInterface $current, \Carbon\CarbonInterface $other) {
+        'nextWeek' => function (CarbonInterface $current, CarbonInterface $other) {
             if ($current->week !== $other->week) {
                 switch ($current->dayOfWeek) {
                     case 0:
@@ -107,7 +123,7 @@ return [
             return '[В] dddd, [в] LT';
         },
         'lastDay' => '[Вчера, в] LT',
-        'lastWeek' => function (\Carbon\CarbonInterface $current, \Carbon\CarbonInterface $other) {
+        'lastWeek' => function (CarbonInterface $current, CarbonInterface $other) {
             if ($current->week !== $other->week) {
                 switch ($current->dayOfWeek) {
                     case 0:
@@ -163,7 +179,7 @@ return [
     'months_standalone' => ['январь', 'февраль', 'март', 'апрель', 'май', 'июнь', 'июль', 'август', 'сентябрь', 'октябрь', 'ноябрь', 'декабрь'],
     'months_short' => ['янв', 'фев', 'мар', 'апр', 'мая', 'июн', 'июл', 'авг', 'сен', 'окт', 'ноя', 'дек'],
     'months_short_standalone' => ['янв', 'фев', 'мар', 'апр', 'май', 'июн', 'июл', 'авг', 'сен', 'окт', 'ноя', 'дек'],
-    'months_regexp' => '/DD?o?\.?(\[[^\[\]]*\]|\s)+MMMM?/',
+    'months_regexp' => '/(DD?o?\.?(\[[^\[\]]*\]|\s)+MMMM?|L{2,4}|l{2,4})/',
     'weekdays' => ['воскресенье', 'понедельник', 'вторник', 'среду', 'четверг', 'пятницу', 'субботу'],
     'weekdays_standalone' => ['воскресенье', 'понедельник', 'вторник', 'среда', 'четверг', 'пятница', 'суббота'],
     'weekdays_short' => ['вск', 'пнд', 'втр', 'срд', 'чтв', 'птн', 'сбт'],

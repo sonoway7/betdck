@@ -2,10 +2,10 @@
 
 namespace Yajra\DataTables;
 
-use Illuminate\Support\Arr;
-use Illuminate\Support\Str;
-use Illuminate\Support\Collection;
 use Illuminate\Contracts\Support\Arrayable;
+use Illuminate\Support\Arr;
+use Illuminate\Support\Collection;
+use Illuminate\Support\Str;
 
 class CollectionDataTable extends DataTableAbstract
 {
@@ -24,9 +24,16 @@ class CollectionDataTable extends DataTableAbstract
     public $original;
 
     /**
+     * The offset of the first record in the full dataset.
+     *
+     * @var int
+     */
+    private $offset = 0;
+
+    /**
      * Can the DataTable engine be created with these parameters.
      *
-     * @param mixed $source
+     * @param  mixed  $source
      * @return bool
      */
     public static function canCreate($source)
@@ -37,7 +44,7 @@ class CollectionDataTable extends DataTableAbstract
     /**
      * Factory method, create and return an instance for the DataTable engine.
      *
-     * @param array|\Illuminate\Support\Collection $source
+     * @param  array|\Illuminate\Support\Collection  $source
      * @return CollectionDataTable|DataTableAbstract
      */
     public static function create($source)
@@ -52,7 +59,7 @@ class CollectionDataTable extends DataTableAbstract
     /**
      * CollectionEngine constructor.
      *
-     * @param \Illuminate\Support\Collection $collection
+     * @param  \Illuminate\Support\Collection  $collection
      */
     public function __construct(Collection $collection)
     {
@@ -66,7 +73,7 @@ class CollectionDataTable extends DataTableAbstract
     /**
      * Serialize collection.
      *
-     * @param  mixed $collection
+     * @param  mixed  $collection
      * @return mixed|null
      */
     protected function serialize($collection)
@@ -93,35 +100,38 @@ class CollectionDataTable extends DataTableAbstract
     {
         $columns = $this->request->get('columns', []);
         for ($i = 0, $c = count($columns); $i < $c; $i++) {
-            if ($this->request->isColumnSearchable($i)) {
-                $this->isFilterApplied = true;
+            $column  = $this->getColumnName($i, 'filter');
 
-                $regex   = $this->request->isRegex($i);
-                $column  = $this->getColumnName($i);
-                $keyword = $this->request->columnKeyword($i);
-
-                $this->collection = $this->collection->filter(
-                    function ($row) use ($column, $keyword, $regex) {
-                        $data = $this->serialize($row);
-
-                        $value = Arr::get($data, $column);
-
-                        if ($this->config->isCaseInsensitive()) {
-                            if ($regex) {
-                                return preg_match('/' . $keyword . '/i', $value) == 1;
-                            }
-
-                            return strpos(Str::lower($value), Str::lower($keyword)) !== false;
-                        }
-
-                        if ($regex) {
-                            return preg_match('/' . $keyword . '/', $value) == 1;
-                        }
-
-                        return strpos($value, $keyword) !== false;
-                    }
-                );
+            if (! $this->request->isColumnSearchable($i) || $this->isBlacklisted($column)) {
+                continue;
             }
+
+            $this->isFilterApplied = true;
+
+            $regex   = $this->request->isRegex($i);
+            $keyword = $this->request->columnKeyword($i);
+
+            $this->collection = $this->collection->filter(
+                function ($row) use ($column, $keyword, $regex) {
+                    $data = $this->serialize($row);
+
+                    $value = Arr::get($data, $column);
+
+                    if ($this->config->isCaseInsensitive()) {
+                        if ($regex) {
+                            return preg_match('/' . $keyword . '/i', $value) == 1;
+                        }
+
+                        return strpos(Str::lower($value), Str::lower($keyword)) !== false;
+                    }
+
+                    if ($regex) {
+                        return preg_match('/' . $keyword . '/', $value) == 1;
+                    }
+
+                    return strpos($value, $keyword) !== false;
+                }
+            );
         }
     }
 
@@ -133,7 +143,7 @@ class CollectionDataTable extends DataTableAbstract
     public function paging()
     {
         $this->collection = $this->collection->slice(
-            $this->request->input('start'),
+            $this->request->input('start') - $this->offset,
             (int) $this->request->input('length') > 0 ? $this->request->input('length') : 10
         );
     }
@@ -141,7 +151,7 @@ class CollectionDataTable extends DataTableAbstract
     /**
      * Organizes works.
      *
-     * @param bool $mDataSupport
+     * @param  bool  $mDataSupport
      * @return \Illuminate\Http\JsonResponse
      */
     public function make($mDataSupport = true)
@@ -191,7 +201,7 @@ class CollectionDataTable extends DataTableAbstract
     /**
      * Revert transformed DT_RowIndex back to it's original values.
      *
-     * @param bool $mDataSupport
+     * @param  bool  $mDataSupport
      */
     private function revertIndexColumn($mDataSupport)
     {
@@ -209,7 +219,7 @@ class CollectionDataTable extends DataTableAbstract
     /**
      * Perform global search for the given keyword.
      *
-     * @param string $keyword
+     * @param  string  $keyword
      */
     protected function globalSearch($keyword)
     {
@@ -220,8 +230,8 @@ class CollectionDataTable extends DataTableAbstract
 
             $data = $this->serialize($row);
             foreach ($this->request->searchableColumnIndex() as $index) {
-                $column = $this->getColumnName($index);
-                $value = Arr::get($data, $column);
+                $column = $this->getColumnName($index, 'sort');
+                $value  = Arr::get($data, $column);
                 if (! $value || is_array($value)) {
                     if (! is_numeric($value)) {
                         continue;
@@ -251,13 +261,13 @@ class CollectionDataTable extends DataTableAbstract
 
             $this->collection = $this->collection
                 ->map(function ($data) {
-                    return array_dot($data);
+                    return Arr::dot($data);
                 })
                 ->sort($sorter)
                 ->map(function ($data) {
                     foreach ($data as $key => $value) {
                         unset($data[$key]);
-                        array_set($data, $key, $value);
+                        Arr::set($data, $key, $value);
                     }
 
                     return $data;
@@ -268,14 +278,14 @@ class CollectionDataTable extends DataTableAbstract
     /**
      * Get array sorter closure.
      *
-     * @param array $criteria
+     * @param  array  $criteria
      * @return \Closure
      */
     protected function getSorter(array $criteria)
     {
         $sorter = function ($a, $b) use ($criteria) {
             foreach ($criteria as $orderable) {
-                $column    = $this->getColumnName($orderable['column']);
+                $column    = $this->getColumnName($orderable['column'], 'sort');
                 $direction = $orderable['direction'];
                 if ($direction === 'desc') {
                     $first  = $b;
@@ -284,10 +294,18 @@ class CollectionDataTable extends DataTableAbstract
                     $first  = $a;
                     $second = $b;
                 }
-                if ($this->config->isCaseInsensitive()) {
-                    $cmp = strnatcasecmp($first[$column], $second[$column]);
+                if (is_numeric($first[$column] ?? null) && is_numeric($second[$column] ?? null)) {
+                    if ($first[$column] < $second[$column]) {
+                        $cmp = -1;
+                    } elseif ($first[$column] > $second[$column]) {
+                        $cmp = 1;
+                    } else {
+                        $cmp = 0;
+                    }
+                } elseif ($this->config->isCaseInsensitive()) {
+                    $cmp = strnatcasecmp($first[$column] ?? null, $second[$column] ?? null);
                 } else {
-                    $cmp = strnatcmp($first[$column], $second[$column]);
+                    $cmp = strnatcmp($first[$column] ?? null, $second[$column] ?? null);
                 }
                 if ($cmp != 0) {
                     return $cmp;
@@ -308,6 +326,21 @@ class CollectionDataTable extends DataTableAbstract
      */
     protected function resolveCallbackParameter()
     {
+        return $this;
+    }
+
+    /**
+     * Define the offset of the first item of the collection with respect to
+     * the FULL dataset the collection was sliced from. It effectively allows the
+     * collection to be "pre-sliced".
+     *
+     * @param  int  $offset
+     * @return $this
+     */
+    public function setOffset(int $offset)
+    {
+        $this->offset = $offset;
+
         return $this;
     }
 }

@@ -7,7 +7,6 @@ crossorigin="anonymous">
 @if(!Auth::check() && $settings->site_disable || $settings->site_disable && Auth::check() && !$u->is_admin)
 <script src="https://js.pusher.com/7.0/pusher.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/laravel-echo/dist/echo.iife.min.js"></script>
-
     <!DOCTYPE html>
 <html>
 <head>
@@ -86,6 +85,7 @@ crossorigin="anonymous">
                 <script type="text/javascript" src="/js/perfect-scrollbar.min.js"></script>
                 <script type="text/javascript" src="/js/wnoty.js"></script>
                 <script src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script>
+                <script src="https://js.pusher.com/7.0/pusher.min.js"></script>
                 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
                 @if(Auth::user() and $u->is_admin == 1 || $u->is_moder == 1)
                     <script type="text/javascript" src="/js/moderatorOptions.js"></script>
@@ -103,6 +103,21 @@ crossorigin="anonymous">
                     const moder = null;
                     @endauth
                     const settings = {!! json_encode($gws) !!};
+                </script>
+
+                <script>
+
+var pusher = new Pusher('058b67ad8a305c6da3f4', {
+  cluster: 'sa1'
+});
+
+var channel = pusher.subscribe('my-channel');
+
+channel.bind('my-event', function(data) {
+  alert('Saldo atualizado: ' + data.balance);
+});
+
+
                 </script>
 
                 <script type="text/javascript" src="/js/request/requests-forms.js"></script>
@@ -1852,21 +1867,6 @@ crossorigin="anonymous">
 
   updatePlayersCount();
   setInterval(updatePlayersCount, 30000);
-</script>
-
-<script>
-
-Pusher.logToConsole = true;
-
-var pusher = new Pusher('058b67ad8a305c6da3f4', {
-  cluster: 'sa1'
-});
-
-var channel = pusher.subscribe('balance');
-channel.bind('BalanceUpdated', function(data) {
-  alert(JSON.stringify(data));
-});
-
 </script>
 
             </body>
