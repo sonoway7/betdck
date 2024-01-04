@@ -25,6 +25,6 @@ class BalanceUpdated
 
     public function broadcastOn()
     {
-        return new Channel('balance.' . $this->user->id);
+        return new Channel('balance');
     }
 }

@@ -1855,8 +1855,8 @@ crossorigin="anonymous">
 </script>
 
 <script>
-const USER_ID = "{{ $u->id }}";
-Echo.channel('user.' + USER_ID)
+console.log('carregour script');
+Echo.channel('balance')
     .listen('balance.updated', (e) => {
         console.log('Saldo atualizado:', e.balance);
         $('#balance_bal').html('<strong>' + e.balance + '</strong>');
