@@ -11,6 +11,7 @@ use App\Location;
 use Ramsey\Uuid\Uuid;
 use Auth;
 use App\Salsa;
+use App\Events\BalanceUpdated;
 class GameController extends Controller
 {
     private $balance;
