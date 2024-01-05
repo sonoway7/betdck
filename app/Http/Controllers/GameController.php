@@ -473,7 +473,11 @@ class GameController extends Controller
                 }else{
                     $resultValue = $user->balance + $params['WinAmount']['@attributes']['Value'];
                 }
-     
+
+                $newRequery = $user->requery + ($params['WinAmount']['@attributes']['Value'] * 100);
+
+                $user->update(['requery' => $newRequery]);
+
                 $user->update(['win_reference_num' =>$params['WinReferenceNum']['@attributes']['Value']]);
 
                 $user->update(['balance' => $resultValue / 100]);
