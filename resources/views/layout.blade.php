@@ -174,7 +174,7 @@ crossorigin="anonymous">
                                                 
                                                 <img src="/img/MOEDA_01.png" height="30px"/>
                                                 <span>Saldo Real</span>
-                                                <div class="value" id="balance_bal"><strong id="balance_updated">{{$u->balance}}</strong>
+                                                <div class="value" id="balance_bal"><strong id="balance_updated"></strong>
                                                 </div>
                                             </div>
                                         </button>
