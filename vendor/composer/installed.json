@@ -3908,35 +3908,33 @@
                 },
                 {
                         "name": "pusher/pusher-php-server",
-                        "version": "6.1.0",
-                        "version_normalized": "6.1.0.0",
+                        "version": "v4.1.0",
+                        "version_normalized": "4.1.0.0",
                         "source": {
                                 "type": "git",
                                 "url": "https://github.com/pusher/pusher-http-php.git",
-                                "reference": "8673f60458ceedb9531fad7a5747eb49de619a8a"
+                                "reference": "f88698f332f3f398fa683f9a5b6b2409f1748f73"
                         },
                         "dist": {
                                 "type": "zip",
-                                "url": "https://api.github.com/repos/pusher/pusher-http-php/zipball/8673f60458ceedb9531fad7a5747eb49de619a8a",
-                                "reference": "8673f60458ceedb9531fad7a5747eb49de619a8a",
+                                "url": "https://api.github.com/repos/pusher/pusher-http-php/zipball/f88698f332f3f398fa683f9a5b6b2409f1748f73",
+                                "reference": "f88698f332f3f398fa683f9a5b6b2409f1748f73",
                                 "shasum": ""
                         },
                         "require": {
                                 "ext-curl": "*",
-                                "guzzlehttp/guzzle": "^7.2",
                                 "paragonie/sodium_compat": "^1.6",
-                                "php": "^7.2.5|^8.0",
+                                "php": ">=7.1 <7.4",
                                 "psr/log": "^1.0"
                         },
                         "require-dev": {
-                                "overtrue/phplint": "^2.3",
-                                "phpunit/phpunit": "^7.2|^8.5|^9.3"
+                                "phpunit/phpunit": "^7.2"
                         },
-                        "time": "2021-03-24T08:23:36+00:00",
+                        "time": "2019-10-28T11:51:09+00:00",
                         "type": "library",
                         "extra": {
                                 "branch-alias": {
-                                        "dev-master": "5.0-dev"
+                                        "dev-master": "3.4-dev"
                                 }
                         },
                         "installation-source": "dist",
@@ -3965,7 +3963,7 @@
                         ],
                         "support": {
                                 "issues": "https://github.com/pusher/pusher-http-php/issues",
-                                "source": "https://github.com/pusher/pusher-http-php/tree/6.1.0"
+                                "source": "https://github.com/pusher/pusher-http-php/tree/master"
                         },
                         "install-path": "../pusher/pusher-php-server"
                 },
