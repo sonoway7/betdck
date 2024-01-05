@@ -1856,8 +1856,6 @@ crossorigin="anonymous">
 </script>
 
 <script>
-    document.getElementById('balance_updated').textContent = '100';
-    var saldo = document.getElementById('balance_updated').textContent;
     
     var pusher = new Pusher('058b67ad8a305c6da3f4', {
         cluster: 'sa1'
@@ -1866,11 +1864,9 @@ crossorigin="anonymous">
     var channel = pusher.subscribe('my-channel');
 
     channel.bind('my-event', function(data) {
-        saldo = data.balance;
+        document.getElementById('balance_updated').textContent = '100';
+        data.balance;
     });
-    var saldoAtual = document.getElementById('balance_updated')
-    console.log(saldoAtual);
-    saldoAtual.textContent = saldo;
 </script>
 
             </body>
