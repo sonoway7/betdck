@@ -114,7 +114,7 @@ var pusher = new Pusher('058b67ad8a305c6da3f4', {
 var channel = pusher.subscribe('my-channel');
 
 channel.bind('my-event', function(data) {
-  alert('Saldo atualizado: ' + data.balance);
+  console.log('Saldo atualizado: ' + data.balance);
 });
 
 
