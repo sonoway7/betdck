@@ -164,13 +164,13 @@ crossorigin="anonymous">
                                     </button>
                                     <div tabindex="-1" role="menu" aria-hidden="true" class="dropdown-menu"
                                          x-placement="bottom-start">
-                                        <button type="button" data-id="balance" tabindex="0" role="menuitem"
+                                        <button type="button" data-id="balance" tabindex="" role="menuitem"
                                                 class="dropdown-item">
                                             <div class="balance-item balance">
                                                 
                                                 <img src="/img/MOEDA_01.png" height="30px"/>
                                                 <span>Saldo Real</span>
-                                                <div class="value" id="balance_bal"><strong id="balance_updated"></strong>
+                                                <div class="value" id="balance_bal"><strong id="balance_updated">{{$u->balance}}</strong>
                                                 </div>
                                             </div>
                                         </button>
