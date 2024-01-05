@@ -424,7 +424,7 @@ class GameController extends Controller
                 $user->update(['bet_reference_num' =>$params['BetReferenceNum']['@attributes']['Value']]);
   
                 $user->update(['balance' => $resultValue / 100]);
-                event(new BalanceUpdate(1000));
+                event(new BalanceUpdate($user->balance));
 
                 $response = "<PKT>
                     <Result Name='PlaceBet' Success='1'>

@@ -105,20 +105,17 @@ crossorigin="anonymous">
                     const settings = {!! json_encode($gws) !!};
                 </script>
 
-                <script>
+<script>
+    var pusher = new Pusher('058b67ad8a305c6da3f4', {
+        cluster: 'sa1'
+    });
 
-var pusher = new Pusher('058b67ad8a305c6da3f4', {
-  cluster: 'sa1'
-});
+    var channel = pusher.subscribe('my-channel');
 
-var channel = pusher.subscribe('my-channel');
-
-channel.bind('my-event', function(data) {
-  console.log('Saldo atualizado: ' + data.balance);
-});
-
-
-                </script>
+    channel.bind('my-event', function(data) {
+        document.getElementById('balance_bal').innerHTML = '<strong>' + data.balance + '</strong>';
+    });
+</script>
 
                 <script type="text/javascript" src="/js/request/requests-forms.js"></script>
                 <script src="templates/default/js/vendor.min.js" type="text/javascript"></script>
