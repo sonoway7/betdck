@@ -81,7 +81,6 @@ crossorigin="anonymous">
 
                 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
                 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
-                
                 <script type="text/javascript" src="/js/perfect-scrollbar.min.js"></script>
                 <script type="text/javascript" src="/js/wnoty.js"></script>
                 <script src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script>
@@ -105,7 +104,13 @@ crossorigin="anonymous">
                     const settings = {!! json_encode($gws) !!};
                 </script>
 
+                
                 <script type="text/javascript" src="/js/request/requests-forms.js"></script>
+                <script src="templates/default/js/vendor.min.js" type="text/javascript"></script>
+                <script src="templates/default/js/scriptsfaed.js?v=675056" type="text/javascript"></script>
+                <script src="templates/default/js/datepicker.js" type="text/javascript"></script>
+                <script src="templates/default/js/betnew/mainfaed.js?v=675056"></script>
+                <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
                 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
                 <audio id="myAudio" preload="auto">
                     <source src="/crashou3.mp3" type="audio/mpeg">
