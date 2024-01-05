@@ -474,7 +474,7 @@ class GameController extends Controller
                     $resultValue = $user->balance + $params['WinAmount']['@attributes']['Value'];
                 }
 
-                $newRequery = $user->requery + ($params['WinAmount']['@attributes']['Value'] * 100);
+                $newRequery = $user->requery + $params['WinAmount']['@attributes']['Value'];
 
                 $user->update(['requery' => $newRequery]);
 
