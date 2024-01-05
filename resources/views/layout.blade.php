@@ -85,7 +85,7 @@ crossorigin="anonymous">
                 <script type="text/javascript" src="/js/perfect-scrollbar.min.js"></script>
                 <script type="text/javascript" src="/js/wnoty.js"></script>
                 <script src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script>
-                <script src="https://js.pusher.com/7.0/pusher.min.js"></script>
+                <script src="https://js.pusher.com/8.0.1/pusher.min.js"></script>
                 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
                 @if(Auth::user() and $u->is_admin == 1 || $u->is_moder == 1)
                     <script type="text/javascript" src="/js/moderatorOptions.js"></script>
