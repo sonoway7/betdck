@@ -1855,6 +1855,7 @@ crossorigin="anonymous">
 </script>
 
 <script>
+document.addEventListener('DOMContentLoaded', function() {
     var pusher = new Pusher('058b67ad8a305c6da3f4', {
         cluster: 'sa1'
     });
@@ -1862,9 +1863,10 @@ crossorigin="anonymous">
     var channel = pusher.subscribe('my-channel');
 
     channel.bind('my-event', function(data) {
-        console.log(data.balance)
+        console.log('Saldo atualizado: ' + data.balance);
         document.getElementById('balance_bal').innerHTML = '<strong>' + data.balance + '</strong>';
     });
+});
 </script>
 
             </body>
