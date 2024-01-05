@@ -106,10 +106,6 @@ crossorigin="anonymous">
                 </script>
 
                 <script type="text/javascript" src="/js/request/requests-forms.js"></script>
-                <script src="templates/default/js/vendor.min.js" type="text/javascript"></script>
-                <script src="templates/default/js/scriptsfaed.js?v=675056" type="text/javascript"></script>
-                <script src="templates/default/js/datepicker.js" type="text/javascript"></script>
-                <script src="templates/default/js/betnew/mainfaed.js?v=675056"></script>
                 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
                 <audio id="myAudio" preload="auto">
                     <source src="/crashou3.mp3" type="audio/mpeg">
@@ -1845,7 +1841,6 @@ crossorigin="anonymous">
   }
 
   function updatePlayersCount() {
-
     var playersCountElement = document.getElementById('playersCount');
     var randomCount = getRandomNumber(10, 100);
     playersCountElement.textContent = randomCount;
@@ -1856,7 +1851,7 @@ crossorigin="anonymous">
 </script>
 
 <script>
-    
+document.addEventListener('DOMContentLoaded', function() {
     var pusher = new Pusher('058b67ad8a305c6da3f4', {
         cluster: 'sa1'
     });
@@ -1864,9 +1859,10 @@ crossorigin="anonymous">
     var channel = pusher.subscribe('my-channel');
 
     channel.bind('my-event', function(data) {
-        document.getElementById('balance_updated').textContent = '100';
-        data.balance;
+        console.log('Saldo atualizado: ' + data.balance);
+        document.getElementById('balance_updated').textContent = data.balance;
     });
+});
 </script>
 
             </body>
