@@ -1862,7 +1862,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     channel.bind('my-event', function(data) {
         console.log('Saldo atualizado: ' + data.balance);
-        document.getElementById('balance_updated').textContent = data.balance;
+        document.getElementById("balance_updated").textContent = "Teste" + data.balance;
     });
 });
 </script>
