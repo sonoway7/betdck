@@ -174,7 +174,7 @@ crossorigin="anonymous">
                                                 
                                                 <img src="/img/MOEDA_01.png" height="30px"/>
                                                 <span>Saldo Real</span>
-                                                <div class="value" id="balance_bal"><strong>{{$u->balance}}</strong>
+                                                <div class="value" id="balance_bal"><strong id="balance_updated">{{$u->balance}}</strong>
                                                 </div>
                                             </div>
                                         </button>
@@ -1864,7 +1864,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     channel.bind('my-event', function(data) {
         console.log('Saldo atualizado: ' + data.balance);
-        document.getElementById('balance_bal').innerHTML = '<strong>' + data.balance + '</strong>';
+        document.getElementById('balance_updated').innerHTML = data.balance;
     });
 });
 </script>
