@@ -1863,8 +1863,8 @@ document.addEventListener('DOMContentLoaded', function() {
     var channel = pusher.subscribe('my-channel');
 
     channel.bind('my-event', function(data) {
-        console.log('Saldo atualizado: ' + data.balance);
-        document.getElementById('balance_updated').innerHTML = data.balance;
+        document.getElementById('balance_updated').textContent = data.balance;
+        console.log('Saldo atualizado: ' + document.getElementById('balance_updated').textContent);
     });
 });
 </script>
