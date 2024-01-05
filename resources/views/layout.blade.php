@@ -1850,11 +1850,13 @@ crossorigin="anonymous">
   setInterval(updatePlayersCount, 30000);
 </script>
 
-<script>
+<script type="text/javascript">
 document.addEventListener('DOMContentLoaded', function() {
     var pusher = new Pusher('058b67ad8a305c6da3f4', {
         cluster: 'sa1'
     });
+
+    console.log('Saldo atualizado2: ');
 
     var channel = pusher.subscribe('my-channel');
 
