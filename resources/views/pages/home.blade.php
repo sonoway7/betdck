@@ -117,6 +117,22 @@
     }
 
 
+    .swiper-button-next2,
+    .swiper-button-prev2 {
+    position: static !important;
+    width: 40px;
+    height: 40px;
+    color: #fff;
+    border-radius: 50%;
+    cursor: pointer;
+    margin: 0 !important;
+    }
+
+    .swiper-button-next2:after, .swiper-button-prev2:after{
+        font-size: 20px !important;
+    }
+
+
     
     .tamanho {
         flex: 0 0 0;
@@ -340,7 +356,7 @@
                     </use>
                 </svg>
 
-                JOGOS POPULARES
+                PG SOFT
             </a>
             <div class="swiper-button-prev"></div>
             <div class="swiper-button-next"></div>
@@ -393,7 +409,32 @@
     </div>
 </div>
 
-<div class="swiper-container swiper game-swiper-pragmatic">
+    </div>
+</div>
+
+
+
+
+
+
+<div class="index-features2">
+    <div class="one-category">
+        <div class="head-one-category">
+        <div style="display: flex;">
+            <a class="h-one-category">
+                <svg width="24" height="24" focusable="false" aria-hidden="true" class="">
+                    <use xlink:href="/templates/default/img/betnew/svg-sprite.e1149d9.svg#icon-inhouse" class="svg-use">
+                    </use>
+                </svg>
+
+                PRAGMATIC PLAY
+            </a>
+            <div class="swiper-button-prev2"></div>
+            <div class="swiper-button-next2"></div>
+            </div>
+        </div>
+
+        <div class="swiper-container swiper game-swiper-pragmatic">
     <div class="swiper-wrapper">
         @php
             $chunkedJogos = array_chunk($jogosPragmatic, 1);
@@ -491,8 +532,8 @@
         slidesPerColumn: 3,
         spaceBetween: 10,
         navigation: {
-            nextEl: '.swiper-button-next',
-            prevEl: '.swiper-button-prev',
+            nextEl: '.swiper-button-next2',
+            prevEl: '.swiper-button-prev2',
         },
         controller: {
             control: swiperPG,
