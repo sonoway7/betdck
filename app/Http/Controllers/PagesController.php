@@ -56,8 +56,8 @@ class PagesController extends Controller
 
     public function home()
     {
-        $jogosPG = Salsa::where('is_enabled', true)->where('id_provider', 0)->get();
-        $jogosPragmatic = Salsa::where('is_enabled', true)->where('id_provider', 1)->get();
+        $jogosPG = Salsa::where('is_enabled', true)->where('id_provider', 0)->get()->toArray();;
+        $jogosPragmatic = Salsa::where('is_enabled', true)->where('id_provider', 1)->get()->toArray();;
     
 
         foreach ($jogosPG as &$jogo) {
