@@ -56,23 +56,36 @@ class PagesController extends Controller
 
     public function home()
     {
-        $jogosCollection = Salsa::where('is_enabled', true)->get();
-        $jogos = $jogosCollection->toArray();
+        $jogosPG = Salsa::where('is_enabled', true)
+                        ->where('id_provider', 0)
+                        ->get()
+                        ->toArray();
     
-        if ($jogos == null) {
-            $jogos = array();
-        } else {
-            foreach ($jogos as &$jogo) {
-                $idJogo = $jogo['id'];
-                $caminhoImagem = $this->encontrarImagemJogos($idJogo);
+        $jogosPragmatic = Salsa::where('is_enabled', true)
+                               ->where('id_provider', 1)
+                               ->get()
+                               ->toArray();
     
-                if ($caminhoImagem !== "") {
-                    $jogo['image_path'] = $caminhoImagem;
-                }
+                               
+        foreach ($jogosPG as &$jogo) {
+            $idJogo = $jogo['id'];
+            $caminhoImagem = $this->encontrarImagemJogos($idJogo);
+    
+            if ($caminhoImagem !== "") {
+                $jogo['image_path'] = $caminhoImagem;
             }
         }
     
-        return view('pages.home', compact('jogos'));
+        foreach ($jogosPragmatic as &$jogo) {
+            $idJogo = $jogo['id'];
+            $caminhoImagem = $this->encontrarImagemJogos($idJogo);
+    
+            if ($caminhoImagem !== "") {
+                $jogo['image_path'] = $caminhoImagem;
+            }
+        }
+    
+        return view('pages.home', compact('jogosPG', 'jogosPragmatic'));
     }
     
     private function encontrarImagemJogos($idJogo)
@@ -81,7 +94,7 @@ class PagesController extends Controller
     
         foreach ($arquivos as $arquivo) {
             $arquivoSemEspacos = trim($arquivo);
-            
+    
             if (strpos($arquivoSemEspacos, $idJogo . '_') === 0) {
                 return "images/games/" . $arquivoSemEspacos;
             }

@@ -347,54 +347,98 @@
             </div>
         </div>
 
-        <div class="swiper-container swiper game-swiper1">
-            <div class="swiper-wrapper">
-                @php
-                    $chunkedJogos = array_chunk($jogos, 1);
-                @endphp
+        <div class="swiper-container swiper game-swiper-pg">
+    <div class="swiper-wrapper">
+        @php
+            $chunkedJogos = array_chunk(jogosPG, 1);
+        @endphp
 
-                @foreach($chunkedJogos as $chunk)
-                    <div class="swiper-slide">
-                        @foreach($chunk as $game)
-                            <div class="game-slide">
-                                @if(isset($game['image_path']) && is_string($game['image_path']))
-                                <div class="img-game-slide" style="background-image: url('{{ $game['image_path'] }}'); background-position: center; background-size: cover;">
-                                    </div>
-                                @else
-                                <div class="img-game-slide" style="background-image: url('');">
-                                    </div>
-                                @endif
+        @foreach($chunkedJogos as $chunk)
+            <div class="swiper-slide">
+                @foreach($chunk as $game)
+                    <div class="game-slide">
+                        @if(isset($game['image_path']) && is_string($game['image_path']))
+                            <div class="img-game-slide" style="background-image: url('{{ $game['image_path'] }}'); background-position: center; background-size: cover;"></div>
+                        @else
+                            <div class="img-game-slide" style="background-image: url('');"></div>
+                        @endif
 
-                                <div class="hover-game-slide">
-                                <form action="{{ secure_url('playGame', ['game_id' => $game['id'] ?? null]) }}" method="post">
-                                        @csrf
-                                        <button type="submit" class="play-game-slide">
-                                            <svg focusable="false" aria-hidden="true" class="">
-                                                <use xlink:href="/templates/default/img/betnew/svg-sprite.e1149d9.svg#icon-play"
-                                                    class="svg-use"></use>
-                                            </svg>
-                                        </button>
-                                    </form>
+                        <div class="hover-game-slide">
+                            <form action="{{ secure_url('playGame', ['game_id' => $game['id'] ?? null]) }}" method="post">
+                                @csrf
+                                <button type="submit" class="play-game-slide">
+                                    <svg focusable="false" aria-hidden="true" class="">
+                                        <use xlink:href="/templates/default/img/betnew/svg-sprite.e1149d9.svg#icon-play" class="svg-use"></use>
+                                    </svg>
+                                </button>
+                            </form>
 
-                                    <div class="provider-game-slide">
-                                        <a href="#">
-                                            @if(isset($game['name']) && is_string($game['name']))
-                                                {{ $game['name'] }}
-                                            @else
-                                                Nome do Jogo Não Disponível
-                                            @endif
-                                        </a>
-                                    </div>
-                                    <div class="provider-game-slide">
-                                        Jogue agora!
-                                    </div>
-                                </div>
+                            <div class="provider-game-slide">
+                                <a href="#">
+                                    @if(isset($game['name']) && is_string($game['name']))
+                                        {{ $game['name'] }}
+                                    @else
+                                        Nome do Jogo Não Disponível
+                                    @endif
+                                </a>
                             </div>
-                        @endforeach
+                            <div class="provider-game-slide">
+                                Jogue agora!
+                            </div>
+                        </div>
                     </div>
                 @endforeach
             </div>
-        </div>
+        @endforeach
+    </div>
+</div>
+
+<div class="swiper-container swiper game-swiper-pragmatic">
+    <div class="swiper-wrapper">
+        @php
+            $chunkedJogos = array_chunk($jogosPragmatic, 1);
+        @endphp
+
+        @foreach($chunkedJogos as $chunk)
+            <div class="swiper-slide">
+                @foreach($chunk as $game)
+                    <div class="game-slide">
+                        @if(isset($game['image_path']) && is_string($game['image_path']))
+                            <div class="img-game-slide" style="background-image: url('{{ $game['image_path'] }}'); background-position: center; background-size: cover;"></div>
+                        @else
+                            <div class="img-game-slide" style="background-image: url('');"></div>
+                        @endif
+
+                        <div class="hover-game-slide">
+                            <form action="{{ secure_url('playGame', ['game_id' => $game['id'] ?? null]) }}" method="post">
+                                @csrf
+                                <button type="submit" class="play-game-slide">
+                                    <svg focusable="false" aria-hidden="true" class="">
+                                        <use xlink:href="/templates/default/img/betnew/svg-sprite.e1149d9.svg#icon-play" class="svg-use"></use>
+                                    </svg>
+                                </button>
+                            </form>
+
+                            <div class="provider-game-slide">
+                                <a href="#">
+                                    @if(isset($game['name']) && is_string($game['name']))
+                                        {{ $game['name'] }}
+                                    @else
+                                        Nome do Jogo Não Disponível
+                                    @endif
+                                </a>
+                            </div>
+                            <div class="provider-game-slide">
+                                Jogue agora!
+                            </div>
+                        </div>
+                    </div>
+                @endforeach
+            </div>
+        @endforeach
+    </div>
+</div>
+
     </div>
 </div>
 
@@ -431,7 +475,7 @@
 @endif
 
 <script>
-    var swiper1 = new Swiper('.game-swiper1', {
+    var swiperPG = new Swiper('.game-swiper-pg', {
         slidesPerView: getSlidesPerView(),
         slidesPerColumn: 3,
         spaceBetween: 10,
@@ -442,7 +486,7 @@
         },
     });
 
-    var swiper2 = new Swiper('.game-swiper2', {
+    var swiperPragmatic = new Swiper('.game-swiper-pragmatic', {
         slidesPerView: getSlidesPerView(),
         slidesPerColumn: 3,
         spaceBetween: 10,
@@ -451,7 +495,7 @@
             prevEl: '.swiper-button-prev',
         },
         controller: {
-            control: swiper1,
+            control: swiperPG,
         },
     });
 
@@ -464,11 +508,11 @@
     }
 
     window.addEventListener('resize', function () {
-        swiper1.params.slidesPerView = getSlidesPerView();
-        swiper1.update();
+        swiperPG.params.slidesPerView = getSlidesPerView();
+        swiperPG.update();
 
-        swiper2.params.slidesPerView = getSlidesPerView();
-        swiper2.update();
+        swiperPragmatic.params.slidesPerView = getSlidesPerView();
+        swiperPragmatic.update();
     });
 </script>
 
