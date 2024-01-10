@@ -535,9 +535,6 @@
             nextEl: '.swiper-button-next2',
             prevEl: '.swiper-button-prev2',
         },
-        controller: {
-            control: swiperPG,
-        },
     });
 
     function getSlidesPerView() {
