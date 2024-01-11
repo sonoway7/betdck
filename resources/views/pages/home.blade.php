@@ -358,8 +358,8 @@
 
                 PG SOFT
             </a>
-            <div class="swiper-button-prev"></div>
-            <div class="swiper-button-next"></div>
+            <div class="swiper-button-prev swiper-button-prev-pg"></div>
+            <div class="swiper-button-next swiper-button-next-pg"></div>
             </div>
         </div>
 
@@ -522,8 +522,8 @@
         spaceBetween: 10,
         slidesPerGroup: 5,
         navigation: {
-            nextEl: '.swiper-button-next',
-            prevEl: '.swiper-button-prev',
+            nextEl: '.swiper-button-next-pg',
+            prevEl: '.swiper-button-prev-pg',
         },
     });
 
