@@ -374,7 +374,7 @@
                 @foreach($chunk as $game)
                     <div class="game-slide">
                         @if(isset($game['image_path']) && is_string($game['image_path']))
-                            <div class="img-game-slide" style="background-image: url('{{ $game['image_path'] }}'); background-position: center; background-size: cover;"></div>
+                        <div class="img-game-slide" style="background-image: url('{{ $game['image_path'] }}'); background-position: center; background-size: 100% 100%;"></div>
                         @else
                             <div class="img-game-slide" style="background-image: url('');"></div>
                         @endif
@@ -445,7 +445,7 @@
                 @foreach($chunk as $game)
                     <div class="game-slide">
                         @if(isset($game['image_path']) && is_string($game['image_path']))
-                            <div class="img-game-slide" style="background-image: url('{{ $game['image_path'] }}');"></div>
+                            <div class="img-game-slide" style="background-image: url('{{ $game['image_path'] }}'); background-position: center; background-size: 100% 100%;"></div>
                         @else
                             <div class="img-game-slide" style="background-image: url('');"></div>
                         @endif
