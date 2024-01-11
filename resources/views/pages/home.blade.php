@@ -429,8 +429,8 @@
 
                 PRAGMATIC PLAY
             </a>
-            <div class="swiper-button-prev2"></div>
-            <div class="swiper-button-next2"></div>
+            <div class="swiper-button-prev"></div>
+            <div class="swiper-button-next"></div>
             </div>
         </div>
 
