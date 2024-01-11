@@ -5843,6 +5843,7 @@ a.view-all {
     justify-content: center;
     color: #fff;
     font-size: 18px;
+    margin-bottom: 20;
 }
 
 .game-slide:hover > .img-game-slide {
