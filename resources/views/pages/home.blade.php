@@ -437,7 +437,7 @@
         <div class="swiper-container swiper game-swiper-pragmatic">
     <div class="swiper-wrapper">
         @php
-            $chunkedJogos = array_chunk($jogosPragmatic, 2);
+            $chunkedJogos = array_chunk($jogosPragmatic, 2); 
         @endphp
 
         @foreach($chunkedJogos as $chunk)
