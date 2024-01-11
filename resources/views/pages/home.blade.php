@@ -520,7 +520,7 @@
         slidesPerView: getSlidesPerView(),
         slidesPerColumn: 3,
         spaceBetween: 10,
-        slidesPerGroup: 4,
+        slidesPerGroup: 5,
         navigation: {
             nextEl: '.swiper-button-next-pg',
             prevEl: '.swiper-button-prev-pg',
@@ -531,7 +531,7 @@
         slidesPerView: getSlidesPerView(),
         slidesPerColumn: 3,
         spaceBetween: 10,
-        slidesPerGroup: 4,
+        slidesPerGroup: 5,
         navigation: {
             nextEl: '.swiper-button-next-pragmatic',
             prevEl: '.swiper-button-prev-pragmatic',
@@ -542,7 +542,7 @@
         if (window.innerWidth < 768) {
             return 2;
         } else {
-            return 4;
+            return 5;
         }
     }
 

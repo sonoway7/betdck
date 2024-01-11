@@ -5834,7 +5834,7 @@ a.view-all {
 .img-game-slide {
     position: relative;
     overflow: hidden;
-    height: 325px;
+    height: 225px;
     background-size: '100% 100%';
     background-position: 'center';
     background-repeat: no-repeat;
