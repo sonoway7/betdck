@@ -374,7 +374,7 @@
                 @foreach($chunk as $game)
                     <div class="game-slide">
                         @if(isset($game['image_path']) && is_string($game['image_path']))
-                        <div class="img-game-slide" style="background-image: url('{{ $game['image_path'] }}'); background-position: center; background-size: 100% 100%;"></div>
+                        <div class="img-game-slide" style="background-image: url('{{ $game['image_path'] }}'); background-position: center; background-size: cover;"></div>
                         @else
                             <div class="img-game-slide" style="background-image: url('');"></div>
                         @endif
@@ -445,7 +445,7 @@
                 @foreach($chunk as $game)
                     <div class="game-slide">
                         @if(isset($game['image_path']) && is_string($game['image_path']))
-                            <div class="img-game-slide" style="background-image: url('{{ $game['image_path'] }}'); background-position: center; background-size: 100% 100%;"></div>
+                            <div class="img-game-slide" style="background-image: url('{{ $game['image_path'] }}'); background-position: center; background-size: cover;"></div>
                         @else
                             <div class="img-game-slide" style="background-image: url('');"></div>
                         @endif
@@ -520,7 +520,7 @@
         slidesPerView: getSlidesPerView(),
         slidesPerColumn: 3,
         spaceBetween: 10,
-        slidesPerGroup: 5,
+        slidesPerGroup: 6,
         navigation: {
             nextEl: '.swiper-button-next-pg',
             prevEl: '.swiper-button-prev-pg',
@@ -531,7 +531,7 @@
         slidesPerView: getSlidesPerView(),
         slidesPerColumn: 3,
         spaceBetween: 10,
-        slidesPerGroup: 5,
+        slidesPerGroup: 6,
         navigation: {
             nextEl: '.swiper-button-next-pragmatic',
             prevEl: '.swiper-button-prev-pragmatic',
@@ -542,7 +542,7 @@
         if (window.innerWidth < 768) {
             return 2;
         } else {
-            return 5;
+            return 6;
         }
     }
 
