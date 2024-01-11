@@ -429,8 +429,8 @@
 
                 PRAGMATIC PLAY
             </a>
-            <div class="swiper-button-prev"></div>
-            <div class="swiper-button-next"></div>
+            <div class="swiper-button-prev swiper-button-prev-pragmatic"></div>
+            <div class="swiper-button-next swiper-button-next-pragmatic"></div>
             </div>
         </div>
 
@@ -531,9 +531,10 @@
         slidesPerView: getSlidesPerView(),
         slidesPerColumn: 3,
         spaceBetween: 10,
+        slidesPerGroup: 5,
         navigation: {
-            nextEl: '.swiper-button-next',
-            prevEl: '.swiper-button-prev',
+            nextEl: '.swiper-button-next-pragmatic',
+            prevEl: '.swiper-button-prev-pragmatic',
         },
     });
 
