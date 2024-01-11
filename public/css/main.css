@@ -5909,11 +5909,17 @@ a.view-all {
 
 .play-game-slide {
     width: calc(40% + 20px);
-    margin-top: 65px;
+    margin-top: 107px;
     min-width: 42px;
     background-image: linear-gradient(45deg, #d2691e 5%, #ffaa80 100%);
     border-radius: 50%;
     display: block;
+}
+
+@media screen and (max-width: 765px) {
+    .play-game-slide {
+        margin-top: 67px !important;
+    }
 }
 
 .play-game-slide:before {
