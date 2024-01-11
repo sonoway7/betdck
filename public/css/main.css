@@ -5836,7 +5836,7 @@ a.view-all {
     overflow: hidden;
     height: 265px;
     background-size: '100% 100%';
-    background-position: 50% 50%;
+    background-position: 'center';
     background-repeat: no-repeat;
     display: flex;
     align-items: center;
