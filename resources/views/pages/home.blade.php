@@ -358,8 +358,8 @@
 
                 PG SOFT
             </a>
-            <div class="swiper-button-prev"></div>
-            <div class="swiper-button-next"></div>
+            <div class="swiper-button-prev swp"></div>
+            <div class="swiper-button-next swp"></div>
             </div>
         </div>
 
@@ -429,8 +429,8 @@
 
                 PRAGMATIC PLAY
             </a>
-            <div class="swiper-button-prev"></div>
-            <div class="swiper-button-next"></div>
+            <div class="swiper-button-prev swp1"></div>
+            <div class="swiper-button-next swp1"></div>
             </div>
         </div>
 
@@ -522,8 +522,8 @@
         spaceBetween: 10,
         slidesPerGroup: 5,
         navigation: {
-            nextEl: '.swiper-button-next',
-            prevEl: '.swiper-button-prev',
+            nextEl: '.swp',
+            prevEl: '.swp',
         },
     });
 
@@ -532,8 +532,8 @@
         slidesPerColumn: 3,
         spaceBetween: 10,
         navigation: {
-            nextEl: '.swiper-button-next2',
-            prevEl: '.swiper-button-prev2',
+            nextEl: '.swp1',
+            prevEl: '.swp1',
         },
     });
 
