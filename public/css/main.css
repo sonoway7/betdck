@@ -5924,7 +5924,7 @@ a.view-all {
 
 .play-game-slide svg {
     position: absolute;
-    top: 44%;
+    top: 40%;
     left: 50%;
     transform: translate(-50%, 0%);
     fill: #fff;
