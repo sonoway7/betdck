@@ -448,7 +448,7 @@
         slidesPerView: getSlidesPerView(),
         slidesPerColumn: 3,
         spaceBetween: 10,
-        slidesPerGroup: 3,
+        slidesPerGroup: 4,
         navigation: {
             nextEl: '.swiper-button-next-pg',
             prevEl: '.swiper-button-prev-pg',
@@ -459,7 +459,7 @@
         if (window.innerWidth < 768) {
             return 2;
         } else {
-            return 3;
+            return 4;
         }
     }
 
