@@ -77,8 +77,9 @@ class PagesController extends Controller
                 $jogo['image_path'] = $caminhoImagem;
             }
         }
+        $jogos = array_merge($jogosPG, $jogosPragmatic);
     
-        return view('pages.home', compact('jogosPG', 'jogosPragmatic'));
+        return view('pages.home', compact('jogos', 'jogosPG', 'jogosPragmatic'));
     }
     
     private function encontrarImagemJogos($idJogo)

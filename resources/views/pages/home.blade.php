@@ -355,8 +355,7 @@
                     <use xlink:href="/templates/default/img/betnew/svg-sprite.e1149d9.svg#icon-inhouse" class="svg-use">
                     </use>
                 </svg>
-
-                PG SOFT
+                JOGOS POPULARES
             </a>
             <div class="swiper-button-prev swiper-button-prev-pg"></div>
             <div class="swiper-button-next swiper-button-next-pg"></div>
@@ -366,7 +365,7 @@
         <div class="swiper-container swiper game-swiper-pg">
     <div class="swiper-wrapper">
         @php
-            $chunkedJogos = array_chunk($jogosPG, 2);
+            $chunkedJogos = array_chunk($jogos, 1);
         @endphp
 
         @foreach($chunkedJogos as $chunk)
@@ -375,77 +374,6 @@
                     <div class="game-slide">
                         @if(isset($game['image_path']) && is_string($game['image_path']))
                         <div class="img-game-slide" style="background-image: url('{{ $game['image_path'] }}'); background-position: center; background-size: cover;"></div>
-                        @else
-                            <div class="img-game-slide" style="background-image: url('');"></div>
-                        @endif
-
-                        <div class="hover-game-slide">
-                            <form action="{{ secure_url('playGame', ['game_id' => $game['id'] ?? null]) }}" method="post">
-                                @csrf
-                                <button type="submit" class="play-game-slide">
-                                    <svg focusable="false" aria-hidden="true" class="">
-                                        <use xlink:href="/templates/default/img/betnew/svg-sprite.e1149d9.svg#icon-play" class="svg-use"></use>
-                                    </svg>
-                                </button>
-                            </form>
-
-                            <div class="provider-game-slide">
-                                <a href="#">
-                                    @if(isset($game['name']) && is_string($game['name']))
-                                        {{ $game['name'] }}
-                                    @else
-                                        Nome do Jogo Não Disponível
-                                    @endif
-                                </a>
-                            </div>
-                            <div class="provider-game-slide">
-                                Jogue agora!
-                            </div>
-                        </div>
-                    </div>
-                @endforeach
-            </div>
-        @endforeach
-    </div>
-</div>
-
-    </div>
-</div>
-
-
-
-
-
-
-<div class="index-features2">
-    <div class="one-category">
-        <div class="head-one-category">
-        <div style="display: flex;">
-            <a class="h-one-category">
-                <svg width="24" height="24" focusable="false" aria-hidden="true" class="">
-                    <use xlink:href="/templates/default/img/betnew/svg-sprite.e1149d9.svg#icon-inhouse" class="svg-use">
-                    </use>
-                </svg>
-
-                PRAGMATIC PLAY
-            </a>
-            <div class="swiper-button-prev swiper-button-prev-pragmatic"></div>
-            <div class="swiper-button-next swiper-button-next-pragmatic"></div>
-            </div>
-        </div>
-
-        <div class="swiper-container swiper game-swiper-pragmatic">
-    <div class="swiper-wrapper">
-        @php
-            $chunkedJogos = array_chunk($jogosPragmatic, 2); 
-        @endphp
-
-        @foreach($chunkedJogos as $chunk)
-            <div class="swiper-slide">
-                @foreach($chunk as $game)
-                    <div class="game-slide">
-                        @if(isset($game['image_path']) && is_string($game['image_path']))
-                            <div class="img-game-slide" style="background-image: url('{{ $game['image_path'] }}'); background-position: center; background-size: cover;"></div>
                         @else
                             <div class="img-game-slide" style="background-image: url('');"></div>
                         @endif
@@ -520,21 +448,10 @@
         slidesPerView: getSlidesPerView(),
         slidesPerColumn: 3,
         spaceBetween: 10,
-        slidesPerGroup: 6,
+        slidesPerGroup: 5,
         navigation: {
             nextEl: '.swiper-button-next-pg',
             prevEl: '.swiper-button-prev-pg',
-        },
-    });
-
-    var swiperPragmatic = new Swiper('.game-swiper-pragmatic', {
-        slidesPerView: getSlidesPerView(),
-        slidesPerColumn: 3,
-        spaceBetween: 10,
-        slidesPerGroup: 6,
-        navigation: {
-            nextEl: '.swiper-button-next-pragmatic',
-            prevEl: '.swiper-button-prev-pragmatic',
         },
     });
 
@@ -542,16 +459,13 @@
         if (window.innerWidth < 768) {
             return 2;
         } else {
-            return 6;
+            return 5;
         }
     }
 
     window.addEventListener('resize', function () {
         swiperPG.params.slidesPerView = getSlidesPerView();
         swiperPG.update();
-
-        swiperPragmatic.params.slidesPerView = getSlidesPerView();
-        swiperPragmatic.update();
     });
 </script>
 
