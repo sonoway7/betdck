@@ -5834,7 +5834,7 @@ a.view-all {
 .img-game-slide {
     position: relative;
     overflow: hidden;
-    height: 285px; 
+    height: 300px; 
     background-size: 'cover';
     background-position: 'center';
     background-repeat: no-repeat;
@@ -5908,7 +5908,7 @@ a.view-all {
 
 .play-game-slide {
     width: calc(40% + 20px);
-    margin-top: 67px;
+    margin-top: 90px;
     min-width: 42px;
     background-image: linear-gradient(45deg, #d2691e 5%, #ffaa80 100%);
     border-radius: 50%;
