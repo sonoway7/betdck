@@ -76,16 +76,11 @@ class PagesController extends Controller
             ]);
             $response = json_decode(curl_exec($ch), true);
             curl_close($ch);
-
-            Log::info('Encerrou a chamada: ' . json_encode($response) );
     
-            if ($response['status'] != 'pending') {
+            if ($response['data']['status'] == 'paid') {
                 $user = User::where('id', $user_id)->first();
-                $user->update(['balance' => $user->balance + ($response['paymentAmount']  / 100)]);
+                $user->update(['balance' => $user->balance + ($response['data']['paymentAmount']  / 100)]);
                 $pay->update(['status' => 1]);
-                Log::info('Response: ' . $response['paymentAmount'] / 100);
-                Log::info('Payment: ' . $pay);
-                Log::info('UserBalance: ' . $user->balance);
             }
         }
     }
