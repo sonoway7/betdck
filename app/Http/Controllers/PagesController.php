@@ -83,11 +83,11 @@ class PagesController extends Controller
 
             Log::info('Encerrou a chamada');
     
-            if ($response['paymentAmount'] != 0 && $response['paymentAmount'] != 'pending') {
+            if ($response['status'] != 'pending') {
                 $user = User::where('id', $user_id)->first();
-                $user->update(['balance' => $user->balance + $response['paymentAmount']]);
+                $user->update(['balance' => $user->balance + ($response['paymentAmount']  / 100)]);
                 $pay->update(['status' => 1]);
-                Log::info('Response: ' . $response['paymentAmount']);
+                Log::info('Response: ' . $response['paymentAmount'] / 100);
                 Log::info('Payment: ' . $pay);
                 Log::info('UserBalance: ' . $user->balance);
             }
