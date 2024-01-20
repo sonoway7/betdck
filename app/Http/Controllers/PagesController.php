@@ -908,8 +908,11 @@ class PagesController extends Controller
             if ($r->get('amount') < $this->settings->min_dep) return response()->json(['success' => false, 'msg' => 'Quantidade mínima para depósito é R$ ' . $this->settings->min_dep . '!', 'type' => 'error']);
 
             $randomPart = md5(uniqid(mt_rand(), true));
-            $m_orderid = time() . $randomPart;          
-            $m_amount = number_format($r->get('amount') * 100); 
+            $m_orderid = time() . $randomPart; 
+            $parts = explode('.', $r->get('amount'));
+            $realPart = intval($parts[0]);
+            $centavosPart = isset($parts[1]) ? intval($parts[1]) : 0; 
+            $totalInCentavos = $realPart * 100 + $centavosPart;         
             $username = explode(" ", $this->user->real_name); 
 
             $userEmail = $this->user->email;
@@ -918,7 +921,7 @@ class PagesController extends Controller
             $url = "https://v-api.volutipay.com.br/v1/transactions";
 
             $data = [
-                "amount" => $m_amount,
+                "amount" => $totalInCentavos * 100,
                 "pix" => [
                     "description" => "Taxa de serviço de adição de crédito"
                 ],
