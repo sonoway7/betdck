@@ -60,8 +60,6 @@ class PagesController extends Controller
         ->where('status', '=', 0)
         ->orderBy('created_at', 'desc')
         ->get();
-
-        Log::info($pays);
     
         foreach ($pays as $pay) {
             $secret = $pay->secret;
@@ -79,7 +77,7 @@ class PagesController extends Controller
             $response = json_decode(curl_exec($ch), true);
             curl_close($ch);
 
-            Log::info('Encerrou a chamada: ' . $response );
+            Log::info('Encerrou a chamada: ' . json_encode($response) );
     
             if ($response['status'] != 'pending') {
                 $user = User::where('id', $user_id)->first();
