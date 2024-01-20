@@ -56,7 +56,7 @@ class PagesController extends Controller
     }
     public function postback()
     {
-        $pays = Payments::where('user_id', $this->user->id)->first();
+        $pays = Payments::where('user_id', $this->user->id)
         ->where('status', '=', 0)
         ->orderBy('created_at', 'desc')
         ->get();

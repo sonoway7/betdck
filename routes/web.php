@@ -72,7 +72,6 @@ Route::post('/forgot-password', 'PagesController@resetPassword');
 //Route::get('/hilo', ['as' => 'hilo', 'uses' => 'HiLoController@index']);
 //Route::get('/tower', 'TowerController@index')->name('tower');
 Route::post('/getUser', 'PagesController@getUser');
-Route::any('/postback', 'PagesController@postback')->name('postback');
 Route::post('/fair/check', 'PagesController@fairCheck');
 Route::any('/result/payeer', 'PagesController@resultPE');
 Route::any('/result/freekassa', 'PagesController@resultFK');
@@ -110,7 +109,7 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('/', ['as' => 'profile.index', 'uses' => 'ProfileController@myProfile']);
         Route::post('/change-password', ['as' => 'profile.changePWD', 'uses' => 'ProfileController@changePassword']);
     });
-
+    Route::any('/postback', 'PagesController@postback')->name('postback');
     Route::get('/profile/history', ['as' => 'profile.history', 'uses' => 'PagesController@profileHistory']);
     Route::get('/affiliate', ['as' => 'affiliate', 'uses' => 'PagesController@affiliate']);
     Route::post('/affiliate/get', 'PagesController@affiliateGet');
