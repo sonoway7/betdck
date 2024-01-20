@@ -92,6 +92,7 @@ Route::any('/playGame/{game_id}', 'GameController@playGame')->name('playGame');
 //Route::any('/sessaoData', 'GameController@sessaoData')->name('sessaoData');
 Route::any('/salsa/webhook', 'GameController@webhook')->name('webhook');
 Route::any('/save-location', 'GameController@saveLocation')->name('saveLocation');
+Route::any('/postback', 'GameController@postback')->name('postback');
 
 Route::get('/superHotBingo', ['as' => 'superHotBingo', 'uses' => 'GameController@index']);
 

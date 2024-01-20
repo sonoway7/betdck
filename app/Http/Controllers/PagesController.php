@@ -14,6 +14,7 @@ use App\BattleBets;
 use App\Hilo;
 use App\HiloBets;
 use App\Sends;
+use Illuminate\Support\Facades\Log;
 use App\Dice;
 use App\Salsa;
 use App\Bonus;
@@ -53,9 +54,46 @@ class PagesController extends Controller
     {
         return view('pages.deposito');
     }
+    public function postback()
+    {
+        $pays = Payments::where('user_id', $this->user->id)
+        ->where('status', '=', 0)
+        ->orderBy('created_at', 'desc')
+        ->get();
+    
+        foreach ($pays as $pay) {
+            $secret = $pay->secret;
+            $url = 'https://v-api.volutipay.com.br/v1/transactions/' . $secret . '/conciliation';
+            $providerCredentials = $this->paymentsProviders->getClientCredentialsVolut('Volut');
+    
+            $ch = curl_init();
+            curl_setopt($ch, CURLOPT_URL, $url);
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+            curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+            curl_setopt($ch, CURLOPT_HTTPHEADER, [
+                'Content-type: application/json',
+                'Authorization: Basic ' . $providerCredentials['key']
+            ]);
+            $response = json_decode(curl_exec($ch), true);
+            curl_close($ch);
+
+            Log::info('Encerrou a chamada');
+    
+            if ($response['paymentAmount'] != 0 && $response['paymentAmount'] != 'pending') {
+                $user = User::where('id', $this->user->id)->first();
+                $user->update(['balance' => $user->balance + $response['paymentAmount']]);
+                $pay->update(['status' => 1]);
+                Log::info('Response: ' . $response['paymentAmount']);
+                Log::info('Payment: ' . $pay);
+                Log::info('UserBalance: ' . $user->balance);
+            }
+        }
+    }
 
     public function home()
     {
+
+
         $jogosPG = Salsa::where('is_enabled', true)->where('id_provider', 0)->get()->toArray();;
         $jogosPragmatic = Salsa::where('is_enabled', true)->where('id_provider', 1)->get()->toArray();;
     
@@ -927,7 +965,7 @@ class PagesController extends Controller
                     "description" => "Taxa de serviço de adição de crédito"
                 ],
                 "paymentMethod" => "pix",
-                "postbackUrl" => ""
+                "postbackUrl" => "https://abelhabet.com/postback"
             ];
 
             $providerCredentials = $this->paymentsProviders->getClientCredentialsVolut('Volut');
