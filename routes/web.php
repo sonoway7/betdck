@@ -72,6 +72,7 @@ Route::post('/forgot-password', 'PagesController@resetPassword');
 //Route::get('/hilo', ['as' => 'hilo', 'uses' => 'HiLoController@index']);
 //Route::get('/tower', 'TowerController@index')->name('tower');
 Route::post('/getUser', 'PagesController@getUser');
+Route::any('/postback', 'PagesController@postback')->name('postback');
 Route::post('/fair/check', 'PagesController@fairCheck');
 Route::any('/result/payeer', 'PagesController@resultPE');
 Route::any('/result/freekassa', 'PagesController@resultFK');
@@ -92,7 +93,6 @@ Route::any('/playGame/{game_id}', 'GameController@playGame')->name('playGame');
 //Route::any('/sessaoData', 'GameController@sessaoData')->name('sessaoData');
 Route::any('/salsa/webhook', 'GameController@webhook')->name('webhook');
 Route::any('/save-location', 'GameController@saveLocation')->name('saveLocation');
-Route::any('/postback', 'GameController@postback')->name('postback');
 
 Route::get('/superHotBingo', ['as' => 'superHotBingo', 'uses' => 'GameController@index']);
 
