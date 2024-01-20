@@ -909,6 +909,7 @@ class PagesController extends Controller
 
             $randomPart = md5(uniqid(mt_rand(), true));
             $m_orderid = time() . $randomPart; 
+            $m_amount = number_format($r->get('amount'), 2, '.', ''); 
             $parts = explode('.', $r->get('amount'));
             $realPart = intval($parts[0]);
             $centavosPart = isset($parts[1]) ? intval($parts[1]) : 0; 
@@ -921,7 +922,7 @@ class PagesController extends Controller
             $url = "https://v-api.volutipay.com.br/v1/transactions";
 
             $data = [
-                "amount" => (int)$totalInCentavos * 100,
+                "amount" => $totalInCentavos * 100,
                 "pix" => [
                     "description" => "Taxa de serviço de adição de crédito"
                 ],
