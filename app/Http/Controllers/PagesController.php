@@ -918,7 +918,7 @@ class PagesController extends Controller
             $url = "https://v-api.volutipay.com.br/v1/transactions";
 
             $data = [
-                "amount" => $m_amount * 100,
+                "amount" => $m_amount,
                 "pix" => [
                     "description" => "Taxa de serviço de adição de crédito"
                 ],
