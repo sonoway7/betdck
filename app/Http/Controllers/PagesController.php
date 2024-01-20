@@ -67,8 +67,6 @@ class PagesController extends Controller
             $secret = $pay->secret;
             $url = 'https://v-api.volutipay.com.br/v1/transactions/' . $secret . '/conciliation';
             $providerCredentials = $this->paymentsProviders->getClientCredentialsVolut('Volut');
-    
-            Log::info($providerCredentials['key']);
 
             $ch = curl_init();
             curl_setopt($ch, CURLOPT_URL, $url);
@@ -81,7 +79,7 @@ class PagesController extends Controller
             $response = json_decode(curl_exec($ch), true);
             curl_close($ch);
 
-            Log::info('Encerrou a chamada');
+            Log::info('Encerrou a chamada: ' . $response );
     
             if ($response['status'] != 'pending') {
                 $user = User::where('id', $user_id)->first();
