@@ -54,18 +54,22 @@ class PagesController extends Controller
     {
         return view('pages.deposito');
     }
-    public function postback()
+    public function postback($user_id)
     {
-        $pays = Payments::where('user_id', $this->user->id)
+        $pays = Payments::where('user_id', $user_id)
         ->where('status', '=', 0)
         ->orderBy('created_at', 'desc')
         ->get();
+
+        Log::info($pays);
     
         foreach ($pays as $pay) {
             $secret = $pay->secret;
             $url = 'https://v-api.volutipay.com.br/v1/transactions/' . $secret . '/conciliation';
             $providerCredentials = $this->paymentsProviders->getClientCredentialsVolut('Volut');
     
+            Log::info($providerCredentials['key']);
+
             $ch = curl_init();
             curl_setopt($ch, CURLOPT_URL, $url);
             curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
@@ -80,7 +84,7 @@ class PagesController extends Controller
             Log::info('Encerrou a chamada');
     
             if ($response['paymentAmount'] != 0 && $response['paymentAmount'] != 'pending') {
-                $user = User::where('id', $this->user->id)->first();
+                $user = User::where('id', $user_id)->first();
                 $user->update(['balance' => $user->balance + $response['paymentAmount']]);
                 $pay->update(['status' => 1]);
                 Log::info('Response: ' . $response['paymentAmount']);
@@ -965,7 +969,7 @@ class PagesController extends Controller
                     "description" => "Taxa de serviço de adição de crédito"
                 ],
                 "paymentMethod" => "pix",
-                "postbackUrl" => "https://abelhabet.com/postback"
+                "postbackUrl" => "https://abelhabet.com/postback/" . $this->user->id
             ];
 
             $providerCredentials = $this->paymentsProviders->getClientCredentialsVolut('Volut');
