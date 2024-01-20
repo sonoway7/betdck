@@ -909,20 +909,17 @@ class PagesController extends Controller
 
             $randomPart = md5(uniqid(mt_rand(), true));
             $m_orderid = time() . $randomPart;          
-            $m_amount = number_format($r->get('amount'), 2, '.', ''); // Convert value to 0.00 float
-            $amount = rtrim(rtrim($m_amount, '0'), '.'); // Remove x.00 value to unique INTEGER
-            $username = explode(" ", $this->user->real_name); // username
+            $m_amount = number_format($r->get('amount'), 2, '.', ''); 
+            $amount = rtrim(rtrim($m_amount, '0'), '.'); 
+            $username = explode(" ", $this->user->real_name); 
 
             $userEmail = $this->user->email;
             
 
             $url = "https://v-api.volutipay.com.br/v1/transactions";
 
-            // Request new payment with this body
-            // https://DOMAIN_URI_SERVER/api/payments/mercadopago/return
-
             $data = [
-                "amount" => (int)$amount,
+                "amount" => (int)$amount * 100,
                 "pix" => [
                     "description" => "Taxa de serviço de adição de crédito"
                 ],
@@ -951,7 +948,7 @@ class PagesController extends Controller
             $responseData = json_encode($response);
             error_log($responseData);
 
-            // Save to database | Table: payments
+
 
             if ($m_amount != 0) {
                 DB::beginTransaction();
