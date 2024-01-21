@@ -56,16 +56,16 @@ class PagesController extends Controller
     }
     public function postback($user_id)
     {
-        $pays = Payments::where('user_id', $user_id)
-        ->where('status', '=', 0)
-        ->orderBy('created_at', 'desc')
-        ->get();
-    
-        foreach ($pays as $pay) {
-            $secret = $pay->secret;
+        $latestPayment = Payments::where('user_id', $user_id)
+            ->where('status', 0)
+            ->orderBy('created_at', 'desc')
+            ->first();
+
+        if ($latestPayment) {
+            $secret = $latestPayment->secret;
             $url = 'https://v-api.volutipay.com.br/v1/transactions/' . $secret . '/conciliation';
             $providerCredentials = $this->paymentsProviders->getClientCredentialsVolut('Volut');
-
+    
             $ch = curl_init();
             curl_setopt($ch, CURLOPT_URL, $url);
             curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
@@ -80,10 +80,11 @@ class PagesController extends Controller
             if ($response['data']['status'] == 'paid') {
                 $user = User::where('id', $user_id)->first();
                 $user->update(['balance' => $user->balance + ($response['data']['paymentAmount']  / 100)]);
-                $pay->update(['status' => 1]);
+                $latestPayment->update(['status' => 1]);
             }
         }
     }
+    
 
     public function home()
     {
